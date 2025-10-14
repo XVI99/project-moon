@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lobotomy Corporation - Project Moon Hub</title>
+    <meta name="description" content="Explore the world of Lobotomy Corporation, the first game in the Project Moon universe. Manage abnormalities and navigate the horrors of The City.">
+    <link rel="canonical" href="https://projectmoonhub.site/lobotomy-corp.html">
+    <meta name="robots" content="index, follow">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'pm-black': '#121212',
+                        'pm-red': '#b91c1c',   // A deep, blood-like red
+                        'pm-gold': '#ca8a04',  // Muted, rich gold for accents
+                        'pm-gray-light': '#d1d5db', // Light gray for text
+                        'pm-gray-dark': '#374151',  // Darker gray for backgrounds
+                    },
+                    fontFamily: {
+                        'sans': ['Lato', 'sans-serif'],
+                        'serif': ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* A little extra CSS for that smooth background effect */
+        body {
+            background-color: #121212;
+            background-image: radial-gradient(circle at 25% 25%, rgba(185, 28, 28, 0.1), transparent 30%),
+                              radial-gradient(circle at 75% 75%, rgba(202, 138, 4, 0.1), transparent 30%);
+        }
+    </style>
+</head>
+
+<body class="bg-pm-black text-pm-gray-light font-sans antialiased">
+
+    <header class="sticky top-0 z-50 bg-pm-black/80 backdrop-blur-sm border-b border-pm-gray-dark">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-serif font-bold text-white hover:text-pm-red transition-colors">
+                Project Moon<span class="text-pm-red">.Hub</span>
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="lobotomy-corp.html" class="text-pm-red transition-colors">Lobotomy Corp</a>
+                <a href="library-of-ruina.html" class="hover:text-pm-red transition-colors">Library of Ruina</a>
+                <a href="limbus-company.html" class="hover:text-pm-red transition-colors">Limbus Company</a>
+            </div>
+            <div class="md:hidden">
+                <!-- Mobile menu button will be added here -->
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+
+        <section class="text-center">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white uppercase tracking-wider">
+                Lobotomy Corporation
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-pm-gray-light">
+                Manage the unmanageable in the world's most dangerous workplace
+            </p>
+        </section>
+
+        <section class="mt-12 md:mt-20 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-serif font-bold text-center text-white mb-6">The First Chapter</h2>
+            <div class="text-left space-y-4 text-pm-gray-light leading-relaxed">
+                <p>
+                    Lobotomy Corporation is the first installment in the Project Moon universe, introducing players to the dark and twisted world of The City. As the manager of a wing of the Lobotomy Corporation, your job is to contain and extract energy from mysterious entities known as Abnormalities.
+                </p>
+                <p>
+                    This page will soon feature detailed guides, lore explanations, and resources for Lobotomy Corporation. Check back later for updates.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-pm-gray-dark/50 border-t border-pm-gray-dark mt-20 py-8">
+        <div class="container mx-auto px-6 text-center text-pm-gray-light">
+            <p>© 2025 Project Moon Hub. All rights reserved.</p>
+            <p class="mt-2 text-sm opacity-70">Project Moon Hub is a fan site and is not affiliated with Project Moon.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
