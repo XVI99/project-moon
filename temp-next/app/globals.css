@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@400;700&display=swap');
+@import "tailwindcss";
+
+/* ===== Project Moon Design System ===== */
+
+/* Custom theme colors */
+@theme inline {
+  --color-pm-black: #121212;
+  --color-pm-red: #b91c1c;
+  --color-pm-crimson: #7f1d1d;
+  --color-pm-gold: #ca8a04;
+  --color-pm-amber: #92400e;
+  --color-pm-gray-light: #d1d5db;
+  --color-pm-gray-dark: #374151;
+
+  /* Typography */
+  --font-sans: 'Lato', sans-serif;
+  --font-serif: 'Cinzel', serif;
+}
+
+/* Root variables */
+:root {
+  --background: #121212;
+  --foreground: #d1d5db;
+}
+
+/* Body styles with Project Moon aesthetic */
+body {
+  background-color: #121212;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(185, 28, 28, 0.1), transparent 30%),
+    radial-gradient(circle at 75% 75%, rgba(202, 138, 4, 0.1), transparent 30%);
+  color: var(--foreground);
+  font-family: 'Lato', sans-serif;
+  min-height: 100vh;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom animations */
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px rgba(185, 28, 28, 0.5);
+  }
+
+  to {
+    box-shadow: 0 0 20px rgba(185, 28, 28, 0.8);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Utility classes */
+.text-shadow-red {
+  text-shadow: 0 0 10px rgba(185, 28, 28, 0.5);
+}
+
+.glass-dark {
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(185, 28, 28, 0.2);
+}
+
+/* Button base styles */
+.btn-primary {
+  @apply bg-pm-red text-white font-bold py-2 px-4 rounded transition-all;
+}
+
+.btn-primary:hover {
+  @apply bg-red-800 -translate-y-0.5;
+}
+
+.btn-secondary {
+  @apply bg-pm-gray-dark text-pm-gray-light font-bold py-2 px-4 rounded border border-pm-gray-dark transition-all;
+}
+
+.btn-secondary:hover {
+  @apply border-pm-red;
+}
+
+.btn-gold {
+  @apply bg-pm-gold text-black font-bold py-2 px-4 rounded transition-all;
+}
+
+.btn-gold:hover {
+  @apply bg-yellow-500 -translate-y-0.5;
+}
