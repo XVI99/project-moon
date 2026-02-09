@@ -1,0 +1,112 @@
+{
+    "common": {
+        "siteTitle": "Project Moon Hub",
+        "siteDescription": "Project Moon 游戏最佳伴侣",
+        "nav": {
+            "home": "首页",
+            "limbusCompany": "边狱公司",
+            "libraryOfRuina": "废墟图书馆",
+            "lobotomyCorp": "脑叶公司",
+            "login": "登录",
+            "signup": "注册",
+            "account": "我的账户",
+            "logout": "退出登录"
+        },
+        "footer": {
+            "tagline": "Project Moon 游戏玩家的最佳伴侣。",
+            "quickLinks": "快速链接",
+            "support": "支持我们",
+            "buyMeCoffee": "Buy Me a Coffee",
+            "aiFaDian": "爱发电",
+            "copyright": "© {year} Project Moon Hub. 非 Project Moon 官方网站。"
+        }
+    },
+    "home": {
+        "title": "Project Moon Hub",
+        "subtitle": "Project Moon 游戏最佳伴侣",
+        "exploreTitle": "探索我们的游戏",
+        "tools": "工具",
+        "guides": "攻略",
+        "database": "数据库"
+    },
+    "limbus": {
+        "title": "边狱公司",
+        "subtitle": "带领罪人们穿越都市，寻找黄金枝",
+        "teamBuilder": {
+            "title": "AI 配队助手",
+            "description": "AI 智能配队推荐",
+            "new": "新功能 ✨",
+            "getRecommendation": "获取 AI 推荐",
+            "analyzing": "分析中...",
+            "yourTeam": "你的队伍",
+            "teamAnalysis": "队伍分析",
+            "attackDistribution": "攻击类型分布：",
+            "dominantSin": "主要属性：",
+            "shareTeam": "分享队伍（即将推出）",
+            "clear": "清空",
+            "selectIdentity": "选择人格",
+            "owned": "已拥有",
+            "markOwned": "请先标记你拥有的人格！",
+            "aiAnalysis": "AI 分析",
+            "score": "评分："
+        },
+        "sinners": {
+            "title": "罪人资料库",
+            "description": "12 位罪人 & 人格",
+            "theTwelveSinners": "十二罪人",
+            "meetSinners": "了解边狱公司的十二位罪人，每位都拥有独特的人格和 E.G.O.",
+            "identities": "人格",
+            "egos": "E.G.O.",
+            "sTier": "S 级"
+        },
+        "egos": {
+            "title": "E.G.O. 收藏",
+            "description": "全部 E.G.O. & 评级",
+            "subtitle": "显现你内心的异想体。E.G.O. 是从异想体遭遇中衍生出的特殊技能。",
+            "gradeEgo": "级 E.G.O.",
+            "needHelp": "需要帮助选择 E.G.O.？",
+            "aiHelp": "我们的 AI 配队工具会为你的队伍推荐最佳 E.G.O.。"
+        },
+        "mirrorDungeon": {
+            "title": "镜像地牢",
+            "description": "攻略 & 流派",
+            "subtitle": "通过我们的详细攻略掌握这个 Roguelike 模式的流派、层级和 E.G.O. 礼物优先级。",
+            "normalMode": "普通模式",
+            "hardMode": "困难模式",
+            "floorGuide": "层级攻略",
+            "buildTierList": "流派评级",
+            "quickTips": "快速通关技巧"
+        },
+        "buildDreamTeam": "立即组建梦之队",
+        "buildTeamDescription": "我们的 AI 配队工具可以根据你拥有的人格和 E.G.O. 帮你组建最优镜像地牢队伍。获取针对任何挑战的个性化推荐！",
+        "openTeamBuilder": "打开配队工具",
+        "mirrorDungeonGuide": "镜像地牢攻略"
+    },
+    "auth": {
+        "login": "登录",
+        "signup": "注册",
+        "email": "邮箱",
+        "password": "密码",
+        "forgotPassword": "忘记密码？",
+        "noAccount": "没有账户？",
+        "hasAccount": "已有账户？",
+        "signInWith": "或使用以下方式登录",
+        "loggingIn": "登录中...",
+        "signingUp": "注册中...",
+        "checkEmail": "请查收邮箱确认链接！"
+    },
+    "account": {
+        "title": "我的账户",
+        "details": "账户详情",
+        "email": "邮箱：",
+        "memberSince": "注册时间：",
+        "subscription": "订阅状态：",
+        "freeTier": "免费用户",
+        "upgradeToPrime": "升级到 Prime",
+        "upgradeDescription": "解锁 AI 配队推荐、云存档和无广告体验",
+        "comingSoon": "即将推出 - $2.99/月",
+        "savedTeams": "已保存的队伍",
+        "noTeams": "你还没有保存任何队伍。",
+        "useTeamBuilder": "使用配队工具创建并保存你的阵容。"
+    }
+}

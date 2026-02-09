@@ -1,19 +1,33 @@
-import { type NextRequest } from 'next/server';
-import { updateSession } from '@/lib/supabase/middleware';
+import { NextRequest, NextResponse } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
 
-export async function middleware(request: NextRequest) {
-    return await updateSession(request);
+const intlMiddleware = createMiddleware(routing);
+
+export function middleware(request: NextRequest) {
+    const pathname = request.nextUrl.pathname;
+
+    // Skip i18n middleware for API routes and static files
+    if (
+        pathname.startsWith('/api/') ||
+        pathname.startsWith('/_next/') ||
+        pathname.startsWith('/auth/') ||
+        pathname.includes('.') // Static files
+    ) {
+        // For /auth/ routes, still refresh Supabase session
+        if (pathname.startsWith('/auth/')) {
+            return NextResponse.next();
+        }
+        return NextResponse.next();
+    }
+
+    return intlMiddleware(request);
 }
 
 export const config = {
-    matcher: [
-        /*
-         * Match all request paths except for the ones starting with:
-         * - _next/static (static files)
-         * - _next/image (image optimization files)
-         * - favicon.ico (favicon file)
-         * - public folder files
-         */
-        '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-    ],
+    // Match all pathnames except for
+    // - API routes
+    // - Next.js internals
+    // - Static files
+    matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
 };

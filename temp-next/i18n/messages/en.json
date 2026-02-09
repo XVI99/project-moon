@@ -1,0 +1,112 @@
+{
+    "common": {
+        "siteTitle": "Project Moon Hub",
+        "siteDescription": "Your ultimate companion for Project Moon games",
+        "nav": {
+            "home": "Home",
+            "limbusCompany": "Limbus Company",
+            "libraryOfRuina": "Library of Ruina",
+            "lobotomyCorp": "Lobotomy Corporation",
+            "login": "Login",
+            "signup": "Sign Up",
+            "account": "My Account",
+            "logout": "Logout"
+        },
+        "footer": {
+            "tagline": "Your companion for all things Project Moon.",
+            "quickLinks": "Quick Links",
+            "support": "Support",
+            "buyMeCoffee": "Buy Me a Coffee",
+            "aiFaDian": "Aifadian",
+            "copyright": "© {year} Project Moon Hub. Not affiliated with Project Moon."
+        }
+    },
+    "home": {
+        "title": "Project Moon Hub",
+        "subtitle": "Your ultimate companion for Project Moon games",
+        "exploreTitle": "Explore Our Games",
+        "tools": "Tools",
+        "guides": "Guides",
+        "database": "Database"
+    },
+    "limbus": {
+        "title": "Limbus Company",
+        "subtitle": "Lead the Sinners on a journey through The City in search of Golden Boughs",
+        "teamBuilder": {
+            "title": "AI Team Builder",
+            "description": "Build optimal teams with AI",
+            "new": "NEW ✨",
+            "getRecommendation": "Get AI Recommendation",
+            "analyzing": "Analyzing...",
+            "yourTeam": "Your Team",
+            "teamAnalysis": "Team Analysis",
+            "attackDistribution": "Attack Distribution:",
+            "dominantSin": "Dominant Sin:",
+            "shareTeam": "Share Team (Coming Soon)",
+            "clear": "Clear",
+            "selectIdentity": "Select an identity",
+            "owned": "Owned",
+            "markOwned": "Please mark at least some identities as owned first!",
+            "aiAnalysis": "AI Analysis",
+            "score": "Score:"
+        },
+        "sinners": {
+            "title": "Sinner Database",
+            "description": "All 12 Sinners & Identities",
+            "theTwelveSinners": "The Twelve Sinners",
+            "meetSinners": "Meet the twelve Sinners of Limbus Company, each with unique identities and E.G.O.",
+            "identities": "Identities",
+            "egos": "E.G.O.",
+            "sTier": "S-Tier"
+        },
+        "egos": {
+            "title": "E.G.O. Collection",
+            "description": "All E.G.O. & Tier Rankings",
+            "subtitle": "Manifest your inner Abnormality. E.G.O. are special skills derived from Abnormality encounters.",
+            "gradeEgo": "Grade E.G.O.",
+            "needHelp": "Need help choosing E.G.O.?",
+            "aiHelp": "Our AI team builder will recommend the best E.G.O. for your team composition."
+        },
+        "mirrorDungeon": {
+            "title": "Mirror Dungeon",
+            "description": "Guides & Build Strategies",
+            "subtitle": "Master the roguelike mode with our comprehensive guide to builds, floors, and E.G.O. gift priorities.",
+            "normalMode": "Normal Mode",
+            "hardMode": "Hard Mode",
+            "floorGuide": "Floor-by-Floor Guide",
+            "buildTierList": "Build Tier List",
+            "quickTips": "Quick Tips for Success"
+        },
+        "buildDreamTeam": "Build Your Dream Team Now",
+        "buildTeamDescription": "Our AI-powered team builder helps you create optimal Mirror Dungeon teams based on your available identities and E.G.O. Get personalized recommendations for any challenge!",
+        "openTeamBuilder": "Open Team Builder",
+        "mirrorDungeonGuide": "Mirror Dungeon Guide"
+    },
+    "auth": {
+        "login": "Login",
+        "signup": "Sign Up",
+        "email": "Email",
+        "password": "Password",
+        "forgotPassword": "Forgot password?",
+        "noAccount": "Don't have an account?",
+        "hasAccount": "Already have an account?",
+        "signInWith": "Or sign in with",
+        "loggingIn": "Logging in...",
+        "signingUp": "Signing up...",
+        "checkEmail": "Check your email for a confirmation link!"
+    },
+    "account": {
+        "title": "My Account",
+        "details": "Account Details",
+        "email": "Email:",
+        "memberSince": "Member Since:",
+        "subscription": "Subscription:",
+        "freeTier": "Free Tier",
+        "upgradeToPrime": "Upgrade to Prime",
+        "upgradeDescription": "Unlock AI team recommendations, cloud saves, and ad-free experience",
+        "comingSoon": "Coming Soon - $2.99/month",
+        "savedTeams": "Saved Teams",
+        "noTeams": "You haven't saved any teams yet.",
+        "useTeamBuilder": "Use the Team Builder to create and save your builds."
+    }
+}

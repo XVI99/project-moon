@@ -1,20 +1,23 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import type { User } from '@supabase/supabase-js';
 
 const navItems = [
-  { href: '/lobotomy-corp', label: 'Lobotomy Corp' },
-  { href: '/library-of-ruina', label: 'Library of Ruina' },
-  { href: '/limbus-company', label: 'Limbus Company' },
-];
+  { href: '/lobotomy-corp', labelKey: 'lobotomyCorp' },
+  { href: '/library-of-ruina', labelKey: 'libraryOfRuina' },
+  { href: '/limbus-company', labelKey: 'limbusCompany' },
+] as const;
 
 export function Header() {
   const pathname = usePathname();
   const router = useRouter();
+  const t = useTranslations('common.nav');
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -45,6 +48,12 @@ export function Header() {
     router.refresh();
   };
 
+  // Check if current path matches nav item (accounting for locale prefix)
+  const isActivePath = (href: string) => {
+    const pathWithoutLocale = pathname.replace(/^\/(en|zh)/, '');
+    return pathWithoutLocale === href || pathWithoutLocale.startsWith(href + '/');
+  };
+
   return (
     <header className="sticky top-0 z-50 glass-dark border-b border-pm-gray-dark">
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -62,21 +71,24 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className={`transition-colors ${pathname === item.href
-                  ? 'text-pm-red'
-                  : 'text-pm-gray-light hover:text-pm-red'
+              className={`transition-colors ${isActivePath(item.href)
+                ? 'text-pm-red'
+                : 'text-pm-gray-light hover:text-pm-red'
                 }`}
             >
-              {item.label}
+              {t(item.labelKey)}
             </Link>
           ))}
+
+          {/* Language Switcher */}
+          <LanguageSwitcher />
 
           {/* Divider */}
           <span className="text-pm-gray-dark">|</span>
 
           {/* Auth Buttons */}
           {loading ? (
-            <span className="text-pm-gray-light text-sm">Loading...</span>
+            <span className="text-pm-gray-light text-sm">...</span>
           ) : user ? (
             <div className="relative">
               <button
@@ -98,21 +110,14 @@ export function Header() {
                     className="block px-4 py-2 text-pm-gray-light hover:bg-pm-black hover:text-white transition-colors"
                     onClick={() => setMenuOpen(false)}
                   >
-                    My Account
-                  </Link>
-                  <Link
-                    href="/saved-teams"
-                    className="block px-4 py-2 text-pm-gray-light hover:bg-pm-black hover:text-white transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Saved Teams
+                    {t('account')}
                   </Link>
                   <hr className="border-pm-gray-dark my-2" />
                   <button
                     onClick={handleSignOut}
                     className="w-full text-left px-4 py-2 text-pm-red hover:bg-pm-black transition-colors"
                   >
-                    Sign Out
+                    {t('logout')}
                   </button>
                 </div>
               )}
@@ -123,20 +128,21 @@ export function Header() {
                 href="/login"
                 className="text-pm-gray-light hover:text-white transition-colors"
               >
-                Sign In
+                {t('login')}
               </Link>
               <Link
                 href="/signup"
                 className="bg-pm-gold text-black font-bold py-1.5 px-4 rounded-lg hover:bg-yellow-500 transition-all text-sm"
               >
-                Sign Up
+                {t('signup')}
               </Link>
             </div>
           )}
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-3">
+          <LanguageSwitcher />
           <button
             className="text-pm-gray-light hover:text-pm-red transition-colors"
             aria-label="Open menu"
