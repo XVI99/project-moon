@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import { toPng } from 'html-to-image';
 import { QRCodeSVG } from 'qrcode.react';
+import { useTranslations } from 'next-intl';
 import type { Identity } from '@/lib/data/limbus/sinners';
 import { DAMAGE_COLORS, RISK_COLORS, type RiskLevel } from '@/lib/data/lobcorp/abnormalities'; // Reusing colors for consistency if needed, though Limbus uses different ones often.
 
@@ -29,6 +30,7 @@ interface TeamShareModalProps {
 }
 
 export function TeamShareModal({ isOpen, onClose, team, score, analysis }: TeamShareModalProps) {
+    const t = useTranslations('limbus.teamBuilder');
     const cardRef = useRef<HTMLDivElement>(null);
     const [isGenerating, setIsGenerating] = useState(false);
 
@@ -76,9 +78,9 @@ export function TeamShareModal({ isOpen, onClose, team, score, analysis }: TeamS
                 {/* Left: Preview / Download Actions */}
                 <div className="p-6 flex flex-col gap-6 md:w-1/3 border-r border-pm-gray-dark/50">
                     <div>
-                        <h3 className="text-xl font-serif font-bold text-white mb-2">Share Your Team</h3>
+                        <h3 className="text-xl font-serif font-bold text-white mb-2">{t('share.title')}</h3>
                         <p className="text-sm text-pm-gray-light">
-                            Download this card to share your team composition with friends or on social media.
+                            {t('share.description')}
                         </p>
                     </div>
 
@@ -88,14 +90,14 @@ export function TeamShareModal({ isOpen, onClose, team, score, analysis }: TeamS
                             disabled={isGenerating}
                             className="w-full bg-pm-gold text-black font-bold py-3 rounded-lg hover:bg-yellow-500 transition-all flex items-center justify-center gap-2"
                         >
-                            {isGenerating ? 'Generating...' : (
+                            {isGenerating ? t('share.generating') : (
                                 <>
-                                    <span>⬇️</span> Download Image
+                                    <span>⬇️</span> {t('share.download')}
                                 </>
                             )}
                         </button>
                         <p className="text-xs text-center text-pm-gray-light/50">
-                            Image generated locally in your browser
+                            {t('share.localGen')}
                         </p>
                     </div>
                 </div>
@@ -159,15 +161,21 @@ export function TeamShareModal({ isOpen, onClose, team, score, analysis }: TeamS
                             {/* Mini Stats */}
                             <div className="flex flex-col gap-1 text-xs text-gray-400 min-w-[100px]">
                                 <div className="flex justify-between">
-                                    <span>Dominant:</span>
-                                    <span className={ATTACK_COLORS[Object.entries(stats.attack).sort((a, b) => b[1] - a[1])[0]?.[0] as keyof typeof ATTACK_COLORS] || 'text-white'}>
-                                        {(Object.entries(stats.attack).sort((a, b) => b[1] - a[1])[0]?.[0] || '-').toUpperCase()}
+                                    <span>{t('share.dominant')}</span>
+                                    <span>
+                                        {t(`damage.${(Object.entries(stats.attack).sort((a, b) => b[1] - a[1])[0]?.[0] || 'slash')}`).toUpperCase()}
                                     </span>
                                 </div>
+                                {score !== undefined && (
+                                    <div className="flex justify-between">
+                                        <span>{t('score')}</span>
+                                        <span className="text-pm-gold">{score}/100</span>
+                                    </div>
+                                )}
                                 <div className="flex justify-between">
-                                    <span>Sin:</span>
+                                    <span>{t('share.sin')}</span>
                                     <span className="text-pm-gold capitalize">
-                                        {topSin ? topSin[0] : '-'}
+                                        {topSin ? t(`sin.${topSin[0]}`) : '-'}
                                     </span>
                                 </div>
                             </div>
@@ -176,7 +184,7 @@ export function TeamShareModal({ isOpen, onClose, team, score, analysis }: TeamS
                         {/* Footer with QR */}
                         <div className="flex items-end justify-between border-t border-gray-800 pt-4 relative z-10">
                             <div>
-                                <div className="text-xs text-gray-500 mb-1">Create your own team at:</div>
+                                <div className="text-xs text-gray-500 mb-1">{t('share.createYourOwn')}</div>
                                 <div className="text-sm font-bold text-pm-gold">projectmoonhub.site</div>
                             </div>
                             <div className="bg-white p-1 rounded">

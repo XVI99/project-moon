@@ -48,7 +48,40 @@
             "owned": "Owned",
             "markOwned": "Please mark at least some identities as owned first!",
             "aiAnalysis": "AI Analysis",
-            "score": "Score:"
+            "score": "Score:",
+            "share": {
+                "button": "📱 Share Team",
+                "buttonMobile": "Share",
+                "title": "Share Your Team",
+                "description": "Download this card to share your team composition with friends or on social media.",
+                "download": "⬇️ Download Image",
+                "generating": "Generating...",
+                "localGen": "Image generated locally in your browser",
+                "createYourOwn": "Create your own team at:",
+                "dominant": "Dominant:",
+                "sin": "Dominant Sin:"
+            },
+            "filters": {
+                "tier": "Tier:",
+                "sinner": "Sinner:",
+                "all": "All",
+                "allSinners": "All Sinners",
+                "stats": "{count} identities | {owned} owned"
+            },
+            "damage": {
+                "slash": "Slash",
+                "pierce": "Pierce",
+                "blunt": "Blunt"
+            },
+            "sin": {
+                "wrath": "Wrath",
+                "lust": "Lust",
+                "sloth": "Sloth",
+                "gluttony": "Gluttony",
+                "gloom": "Gloom",
+                "pride": "Pride",
+                "envy": "Envy"
+            }
         },
         "sinners": {
             "title": "Sinner Database",

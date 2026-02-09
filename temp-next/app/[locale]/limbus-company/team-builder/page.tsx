@@ -2,7 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
 import { SINNERS, getAllIdentities, type Identity, type Sinner } from '@/lib/data/limbus/sinners';
+import { SINNERS_ZH } from '@/lib/data/limbus/sinners_zh';
 import { type EGO } from '@/lib/data/limbus/egos';
 import { AdPlaceholder } from '@/components/ads/AdPlaceholder';
 import { TeamShareModal } from '@/components/limbus/TeamShareModal';
@@ -18,6 +20,10 @@ interface AIRecommendation {
 }
 
 export default function TeamBuilderPage() {
+    const t = useTranslations('limbus.teamBuilder');
+    const locale = useLocale();
+    const sinnersData = locale === 'zh' ? SINNERS_ZH : SINNERS;
+
     const [selectedIdentities, setSelectedIdentities] = useState<Identity[]>([]);
     const [ownedIdentities, setOwnedIdentities] = useState<Set<string>>(new Set());
     const [filterTier, setFilterTier] = useState<string>('all');
@@ -26,7 +32,7 @@ export default function TeamBuilderPage() {
     const [aiRecommendation, setAiRecommendation] = useState<AIRecommendation | null>(null);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-    const allIdentities = useMemo(() => getAllIdentities(), []);
+    const allIdentities = useMemo(() => sinnersData.flatMap(s => s.identities), [sinnersData]);
 
     const filteredIdentities = useMemo(() => {
         return allIdentities.filter(identity => {
@@ -121,10 +127,10 @@ export default function TeamBuilderPage() {
                     ← Back to Limbus Company
                 </Link>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-white">
-                    🎯 AI Team Builder
+                    🎯 {t('title')}
                 </h1>
                 <p className="mt-2 text-pm-gray-light max-w-2xl mx-auto">
-                    Build your optimal Mirror Dungeon team. Mark identities you own and get AI recommendations.
+                    {t('description')}
                 </p>
             </div>
 
@@ -134,34 +140,34 @@ export default function TeamBuilderPage() {
                     {/* Filters */}
                     <div className="flex flex-wrap gap-4 items-center bg-pm-gray-dark/30 p-4 rounded-lg">
                         <div>
-                            <label className="text-sm text-pm-gray-light mr-2">Tier:</label>
+                            <label className="text-sm text-pm-gray-light mr-2">{t('filters.tier')}</label>
                             <select
                                 value={filterTier}
                                 onChange={(e) => setFilterTier(e.target.value)}
                                 className="bg-pm-black border border-pm-gray-dark rounded px-3 py-1 text-white"
                             >
-                                <option value="all">All</option>
-                                <option value="S">S Tier</option>
+                                <option value="all">{t('filters.all')}</option>
+                                <option value="S">{t('sinners.sTier')}</option>
                                 <option value="A">A Tier</option>
                                 <option value="B">B Tier</option>
                                 <option value="C">C Tier</option>
                             </select>
                         </div>
                         <div>
-                            <label className="text-sm text-pm-gray-light mr-2">Sinner:</label>
+                            <label className="text-sm text-pm-gray-light mr-2">{t('filters.sinner')}</label>
                             <select
                                 value={filterSinner}
                                 onChange={(e) => setFilterSinner(e.target.value)}
                                 className="bg-pm-black border border-pm-gray-dark rounded px-3 py-1 text-white"
                             >
-                                <option value="all">All Sinners</option>
-                                {SINNERS.map(sinner => (
+                                <option value="all">{t('filters.allSinners')}</option>
+                                {sinnersData.map(sinner => (
                                     <option key={sinner.id} value={sinner.id}>{sinner.name}</option>
                                 ))}
                             </select>
                         </div>
                         <span className="text-sm text-pm-gray-light ml-auto">
-                            {filteredIdentities.length} identities | {ownedIdentities.size} owned
+                            {t('filters.stats', { count: filteredIdentities.length, owned: ownedIdentities.size })}
                         </span>
                     </div>
 
@@ -259,7 +265,7 @@ export default function TeamBuilderPage() {
                             </>
                         ) : (
                             <>
-                                🤖 Get AI Recommendation
+                                🤖 {t('getRecommendation')}
                             </>
                         )}
                     </button>
@@ -269,10 +275,10 @@ export default function TeamBuilderPage() {
                         <div className="bg-gradient-to-br from-pm-red/10 to-pm-gold/10 border border-pm-gold/50 rounded-lg p-4">
                             <div className="flex items-center justify-between mb-3">
                                 <h3 className="font-serif font-bold text-white">
-                                    🤖 AI Analysis
+                                    🤖 {t('aiAnalysis')}
                                 </h3>
                                 <span className="text-xs bg-pm-gold text-black px-2 py-1 rounded font-bold">
-                                    Score: {aiRecommendation.score}/100
+                                    {t('score')} {aiRecommendation.score}/100
                                 </span>
                             </div>
                             <p className="text-sm text-pm-gray-light mb-3">
@@ -294,14 +300,14 @@ export default function TeamBuilderPage() {
                     <div className="bg-pm-gray-dark/30 border border-pm-gray-dark rounded-lg p-4">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-lg font-serif font-bold text-white">
-                                Your Team ({selectedIdentities.length}/{TEAM_SIZE})
+                                {t('yourTeam')} ({selectedIdentities.length}/{TEAM_SIZE})
                             </h3>
                             {selectedIdentities.length > 0 && (
                                 <button
                                     onClick={clearTeam}
                                     className="text-sm text-pm-red hover:text-red-400"
                                 >
-                                    Clear
+                                    {t('clear')}
                                 </button>
                             )}
                         </div>
@@ -333,7 +339,7 @@ export default function TeamBuilderPage() {
                                     className="flex items-center gap-3 border border-dashed border-pm-gray-dark p-2 rounded"
                                 >
                                     <span className="text-pm-gray-dark font-bold">{selectedIdentities.length + i + 1}</span>
-                                    <p className="text-sm text-pm-gray-light">Select an identity</p>
+                                    <p className="text-sm text-pm-gray-light">{t('selectIdentity')}</p>
                                 </div>
                             ))}
                         </div>
@@ -348,25 +354,25 @@ export default function TeamBuilderPage() {
 
                             <div className="space-y-3 text-sm">
                                 <div>
-                                    <p className="text-pm-gray-light mb-1">Attack Distribution:</p>
+                                    <p className="text-pm-gray-light mb-1">{t('attackDistribution')}</p>
                                     <div className="flex gap-2">
                                         <span className="px-2 py-1 bg-red-900/30 text-red-300 rounded">
-                                            Slash: {teamAnalysis.attackTypes.slash}
+                                            {t('damage.slash')}: {teamAnalysis.attackTypes.slash}
                                         </span>
                                         <span className="px-2 py-1 bg-yellow-900/30 text-yellow-300 rounded">
-                                            Pierce: {teamAnalysis.attackTypes.pierce}
+                                            {t('damage.pierce')}: {teamAnalysis.attackTypes.pierce}
                                         </span>
                                         <span className="px-2 py-1 bg-blue-900/30 text-blue-300 rounded">
-                                            Blunt: {teamAnalysis.attackTypes.blunt}
+                                            {t('damage.blunt')}: {teamAnalysis.attackTypes.blunt}
                                         </span>
                                     </div>
                                 </div>
 
                                 {teamAnalysis.dominantSin && (
                                     <div>
-                                        <p className="text-pm-gray-light mb-1">Dominant Sin:</p>
+                                        <p className="text-pm-gray-light mb-1">{t('dominantSin')}</p>
                                         <span className="text-pm-gold font-medium capitalize">
-                                            {teamAnalysis.dominantSin[0]} ({teamAnalysis.dominantSin[1]})
+                                            {t(`sin.${teamAnalysis.dominantSin[0]}`)} ({teamAnalysis.dominantSin[1]})
                                         </span>
                                     </div>
                                 )}
@@ -381,7 +387,7 @@ export default function TeamBuilderPage() {
                         disabled={selectedIdentities.length === 0}
                         className="w-full bg-pm-gold text-black font-bold py-3 rounded-lg hover:bg-yellow-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
-                        📱 Share Team
+                        {t('share.button')}
                     </button>
 
                     {/* Ad Placeholder */}
