@@ -3,15 +3,26 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { SINNERS, getAllIdentities, type Identity, type Sinner } from '@/lib/data/limbus/sinners';
+import { type EGO } from '@/lib/data/limbus/egos';
 import { AdPlaceholder } from '@/components/ads/AdPlaceholder';
 
 const TEAM_SIZE = 5;
+
+interface AIRecommendation {
+    team: Identity[];
+    analysis: string;
+    synergies: string[];
+    suggestedEGOs: EGO[];
+    score: number;
+}
 
 export default function TeamBuilderPage() {
     const [selectedIdentities, setSelectedIdentities] = useState<Identity[]>([]);
     const [ownedIdentities, setOwnedIdentities] = useState<Set<string>>(new Set());
     const [filterTier, setFilterTier] = useState<string>('all');
     const [filterSinner, setFilterSinner] = useState<string>('all');
+    const [isLoading, setIsLoading] = useState(false);
+    const [aiRecommendation, setAiRecommendation] = useState<AIRecommendation | null>(null);
 
     const allIdentities = useMemo(() => getAllIdentities(), []);
 
@@ -46,6 +57,37 @@ export default function TeamBuilderPage() {
 
     const clearTeam = () => {
         setSelectedIdentities([]);
+        setAiRecommendation(null);
+    };
+
+    const getAIRecommendation = async () => {
+        if (ownedIdentities.size === 0) {
+            alert('Please mark at least some identities as owned first!');
+            return;
+        }
+
+        setIsLoading(true);
+        try {
+            const response = await fetch('/api/ai/recommend', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ownedIdentities: Array.from(ownedIdentities),
+                    scenario: 'general',
+                }),
+            });
+
+            if (!response.ok) throw new Error('Failed to get recommendation');
+
+            const data: AIRecommendation = await response.json();
+            setAiRecommendation(data);
+            setSelectedIdentities(data.team);
+        } catch (error) {
+            console.error('Error getting AI recommendation:', error);
+            alert('Failed to get AI recommendation. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     // Simple team analysis
@@ -70,11 +112,17 @@ export default function TeamBuilderPage() {
         <div className="container mx-auto px-6 py-12">
             {/* Header */}
             <div className="text-center mb-10">
+                <Link
+                    href="/limbus-company"
+                    className="text-pm-gray-light hover:text-pm-gold text-sm mb-4 inline-block"
+                >
+                    ← Back to Limbus Company
+                </Link>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-white">
                     🎯 AI Team Builder
                 </h1>
                 <p className="mt-2 text-pm-gray-light max-w-2xl mx-auto">
-                    Build your optimal Mirror Dungeon team. Select identities you own and add them to your team.
+                    Build your optimal Mirror Dungeon team. Mark identities you own and get AI recommendations.
                 </p>
             </div>
 
@@ -111,7 +159,7 @@ export default function TeamBuilderPage() {
                             </select>
                         </div>
                         <span className="text-sm text-pm-gray-light ml-auto">
-                            {filteredIdentities.length} identities
+                            {filteredIdentities.length} identities | {ownedIdentities.size} owned
                         </span>
                     </div>
 
@@ -196,6 +244,50 @@ export default function TeamBuilderPage() {
 
                 {/* Right: Team Panel */}
                 <div className="space-y-6">
+                    {/* AI Recommendation Button */}
+                    <button
+                        onClick={getAIRecommendation}
+                        disabled={isLoading || ownedIdentities.size === 0}
+                        className="w-full bg-gradient-to-r from-pm-red to-pm-gold text-white font-bold py-3 rounded-lg hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                        {isLoading ? (
+                            <>
+                                <span className="animate-spin">⏳</span>
+                                Analyzing...
+                            </>
+                        ) : (
+                            <>
+                                🤖 Get AI Recommendation
+                            </>
+                        )}
+                    </button>
+
+                    {/* AI Recommendation Result */}
+                    {aiRecommendation && (
+                        <div className="bg-gradient-to-br from-pm-red/10 to-pm-gold/10 border border-pm-gold/50 rounded-lg p-4">
+                            <div className="flex items-center justify-between mb-3">
+                                <h3 className="font-serif font-bold text-white">
+                                    🤖 AI Analysis
+                                </h3>
+                                <span className="text-xs bg-pm-gold text-black px-2 py-1 rounded font-bold">
+                                    Score: {aiRecommendation.score}/100
+                                </span>
+                            </div>
+                            <p className="text-sm text-pm-gray-light mb-3">
+                                {aiRecommendation.analysis}
+                            </p>
+                            {aiRecommendation.synergies.length > 0 && (
+                                <div className="flex flex-wrap gap-1">
+                                    {aiRecommendation.synergies.map((synergy, i) => (
+                                        <span key={i} className="text-xs bg-pm-gray-dark text-pm-gold px-2 py-1 rounded">
+                                            ✨ {synergy}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
                     {/* Current Team */}
                     <div className="bg-pm-gray-dark/30 border border-pm-gray-dark rounded-lg p-4">
                         <div className="flex justify-between items-center mb-4">
@@ -280,29 +372,13 @@ export default function TeamBuilderPage() {
                         </div>
                     )}
 
-                    {/* Share Button */}
+                    {/* Share Button Placeholder */}
                     <button
                         disabled={selectedIdentities.length === 0}
                         className="w-full bg-pm-gold text-black font-bold py-3 rounded-lg hover:bg-yellow-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         📱 Share Team (Coming Soon)
                     </button>
-
-                    {/* AI Recommendation Teaser */}
-                    <div className="bg-gradient-to-r from-pm-red/20 to-pm-gold/20 border border-pm-red/30 rounded-lg p-4 text-center">
-                        <h4 className="font-serif font-bold text-white mb-2">
-                            🤖 AI Recommendations
-                        </h4>
-                        <p className="text-sm text-pm-gray-light mb-3">
-                            Get personalized team suggestions powered by GPT-4
-                        </p>
-                        <Link
-                            href="/signup"
-                            className="inline-block text-sm text-pm-gold hover:text-yellow-400 font-medium"
-                        >
-                            Sign up for Prime access →
-                        </Link>
-                    </div>
 
                     {/* Ad Placeholder */}
                     <AdPlaceholder position="sidebar" />
@@ -311,3 +387,4 @@ export default function TeamBuilderPage() {
         </div>
     );
 }
+

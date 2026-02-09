@@ -46,46 +46,59 @@ export default function LimbusCompanyPage() {
             </section>
 
             {/* Quick Tools Navigation */}
-            <section className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <section className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
                 <Link
                     href="/limbus-company/team-builder"
-                    className="bg-pm-red/20 border border-pm-red/50 rounded-lg p-6 text-center hover:border-pm-red hover:bg-pm-red/30 transition-all card-hover group"
+                    className="bg-gradient-to-br from-pm-red/30 to-pm-gold/20 border border-pm-red/50 rounded-lg p-6 text-center hover:border-pm-gold hover:scale-105 transition-all group"
                 >
                     <div className="text-4xl mb-3">🎯</div>
                     <h3 className="text-xl font-serif font-bold text-white group-hover:text-pm-gold transition-colors">
                         AI Team Builder
                     </h3>
                     <p className="mt-2 text-sm text-pm-gray-light">
-                        Build optimal teams with AI recommendations
+                        Build optimal teams with AI
                     </p>
-                    <span className="mt-4 inline-block text-pm-gold text-sm font-bold">
-                        Coming Soon →
+                    <span className="mt-3 inline-block text-pm-gold text-xs font-bold px-2 py-1 bg-pm-gold/20 rounded">
+                        NEW ✨
                     </span>
                 </Link>
 
                 <Link
                     href="/limbus-company/sinners"
-                    className="bg-pm-gray-dark/50 border border-pm-gray-dark rounded-lg p-6 text-center hover:border-pm-gold transition-all card-hover group"
+                    className="bg-pm-gray-dark/50 border border-pm-gray-dark rounded-lg p-6 text-center hover:border-pm-gold hover:scale-105 transition-all group"
                 >
                     <div className="text-4xl mb-3">👥</div>
                     <h3 className="text-xl font-serif font-bold text-white group-hover:text-pm-gold transition-colors">
                         Sinner Database
                     </h3>
                     <p className="mt-2 text-sm text-pm-gray-light">
-                        Complete guides for all 12 Sinners
+                        All 12 Sinners & Identities
                     </p>
                 </Link>
 
                 <Link
                     href="/limbus-company/egos"
-                    className="bg-pm-gray-dark/50 border border-pm-gray-dark rounded-lg p-6 text-center hover:border-pm-gold transition-all card-hover group"
+                    className="bg-pm-gray-dark/50 border border-pm-gray-dark rounded-lg p-6 text-center hover:border-pm-gold hover:scale-105 transition-all group"
                 >
                     <div className="text-4xl mb-3">👁️</div>
                     <h3 className="text-xl font-serif font-bold text-white group-hover:text-pm-gold transition-colors">
                         E.G.O. Collection
                     </h3>
                     <p className="mt-2 text-sm text-pm-gray-light">
-                        All E.G.O. items and their effects
+                        All E.G.O. & Tier Rankings
+                    </p>
+                </Link>
+
+                <Link
+                    href="/limbus-company/mirror-dungeon"
+                    className="bg-pm-gray-dark/50 border border-pm-gray-dark rounded-lg p-6 text-center hover:border-pm-gold hover:scale-105 transition-all group"
+                >
+                    <div className="text-4xl mb-3">🪞</div>
+                    <h3 className="text-xl font-serif font-bold text-white group-hover:text-pm-gold transition-colors">
+                        Mirror Dungeon
+                    </h3>
+                    <p className="mt-2 text-sm text-pm-gray-light">
+                        Guides & Build Strategies
                     </p>
                 </Link>
             </section>
@@ -118,27 +131,25 @@ export default function LimbusCompanyPage() {
             <section className="mt-16 max-w-4xl mx-auto">
                 <div className="bg-gradient-to-r from-pm-red/20 to-pm-gold/20 border border-pm-red/30 rounded-lg p-8 text-center">
                     <h2 className="text-2xl font-serif font-bold text-white mb-4">
-                        🚀 AI Team Builder Coming Soon
+                        🎯 Build Your Dream Team Now
                     </h2>
                     <p className="text-pm-gray-light mb-6 max-w-2xl mx-auto">
-                        Our AI-powered team builder will help you create optimal Mirror Dungeon teams
+                        Our AI-powered team builder helps you create optimal Mirror Dungeon teams
                         based on your available identities and E.G.O. Get personalized recommendations
-                        for any boss or challenge!
+                        for any challenge!
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button
-                            disabled
-                            className="bg-pm-gray-dark text-pm-gray-light font-bold py-3 px-6 rounded-lg cursor-not-allowed opacity-60"
-                        >
-                            ⏳ Under Development
-                        </button>
                         <Link
-                            href="https://buymeacoffee.com/projectmoonhub"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href="/limbus-company/team-builder"
                             className="bg-pm-gold text-black font-bold py-3 px-6 rounded-lg hover:bg-yellow-500 transition-all"
                         >
-                            ☕ Support Development
+                            🎯 Open Team Builder
+                        </Link>
+                        <Link
+                            href="/limbus-company/mirror-dungeon"
+                            className="bg-pm-gray-dark text-white font-bold py-3 px-6 rounded-lg hover:bg-pm-gray-dark/80 transition-all"
+                        >
+                            🪞 Mirror Dungeon Guide
                         </Link>
                     </div>
                 </div>
