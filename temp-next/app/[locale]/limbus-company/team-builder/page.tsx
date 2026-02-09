@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { SINNERS, getAllIdentities, type Identity, type Sinner } from '@/lib/data/limbus/sinners';
 import { type EGO } from '@/lib/data/limbus/egos';
 import { AdPlaceholder } from '@/components/ads/AdPlaceholder';
+import { TeamShareModal } from '@/components/limbus/TeamShareModal';
 
 const TEAM_SIZE = 5;
 
@@ -23,6 +24,7 @@ export default function TeamBuilderPage() {
     const [filterSinner, setFilterSinner] = useState<string>('all');
     const [isLoading, setIsLoading] = useState(false);
     const [aiRecommendation, setAiRecommendation] = useState<AIRecommendation | null>(null);
+    const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
     const allIdentities = useMemo(() => getAllIdentities(), []);
 
@@ -373,17 +375,27 @@ export default function TeamBuilderPage() {
                     )}
 
                     {/* Share Button Placeholder */}
+                    {/* Share Button */}
                     <button
+                        onClick={() => setIsShareModalOpen(true)}
                         disabled={selectedIdentities.length === 0}
-                        className="w-full bg-pm-gold text-black font-bold py-3 rounded-lg hover:bg-yellow-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full bg-pm-gold text-black font-bold py-3 rounded-lg hover:bg-yellow-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
-                        📱 Share Team (Coming Soon)
+                        📱 Share Team
                     </button>
 
                     {/* Ad Placeholder */}
                     <AdPlaceholder position="sidebar" />
                 </div>
             </div>
+            {/* Share Modal */}
+            <TeamShareModal
+                isOpen={isShareModalOpen}
+                onClose={() => setIsShareModalOpen(false)}
+                team={selectedIdentities}
+                score={aiRecommendation?.score}
+                analysis={aiRecommendation?.analysis}
+            />
         </div>
     );
 }
