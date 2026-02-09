@@ -4,14 +4,11 @@ import { notFound } from 'next/navigation';
 import { SINNERS, getSinnerById } from '@/lib/data/limbus/sinners';
 import { getEGOsBySinner, GRADE_COLORS } from '@/lib/data/limbus/egos';
 
+// Use edge runtime for Cloudflare Pages compatibility
+export const runtime = 'edge';
+
 interface Props {
     params: Promise<{ id: string }>;
-}
-
-export async function generateStaticParams() {
-    return SINNERS.map((sinner) => ({
-        id: sinner.id,
-    }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
