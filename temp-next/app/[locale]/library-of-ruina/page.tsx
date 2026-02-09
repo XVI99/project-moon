@@ -42,7 +42,7 @@ export default function LibraryOfRuinaPage() {
                         Ask questions about the story and lore
                     </p>
                     <span className="mt-4 inline-block text-pm-gold text-sm font-bold">
-                        Coming Soon →
+                        Try it now →
                     </span>
                 </Link>
 

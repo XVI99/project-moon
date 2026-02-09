@@ -68,7 +68,7 @@ export default function LobotomyCorpPage() {
                         Plan your work rotations
                     </p>
                     <span className="mt-4 inline-block text-pm-gold text-sm font-bold">
-                        Coming Soon →
+                        Try now →
                     </span>
                 </Link>
             </section>
