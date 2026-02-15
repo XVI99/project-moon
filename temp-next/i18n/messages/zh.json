@@ -25,6 +25,35 @@
     "home": {
         "title": "Project Moon Hub",
         "subtitle": "Project Moon 游戏最佳伴侣",
+        "hero": {
+            "title": "直面恐惧，创造未来",
+            "subtitle": "Project Moon 阴暗迷人宇宙的终极指南。欢迎来到都市。"
+        },
+        "video": {
+            "title": "体验疯狂"
+        },
+        "intro": {
+            "title": "都市邀请函",
+            "p1": "Project Moon 的世界由一个被称为“都市”的庞大巨型城市主宰。这是一个鲜明对比的地方，由“奇点”诞生的难以想象的科技与令人窒息的反乌托邦共存。都市由 26 个被称为“翼”的超级企业实体统治，每个都有自己的法律、伦理和可怕的力量。",
+            "p2": "从<strong class=\"text-white\">脑叶公司</strong>的生物收容大厅，到<strong class=\"text-white\">废墟图书馆</strong>的宿命对决，再到<strong class=\"text-white\">边狱公司</strong>罪人们的绝望朝圣，每一个故事都是在一个遗忘了意义的世界中对生存、身份和一丝人性的挣扎。我们要记录这一切。"
+        },
+        "games": {
+            "title": "选择你的扭曲",
+            "explore": "探索中心",
+            "steam": "在 Steam 上查看",
+            "lobotomy": {
+                "title": "脑叶公司",
+                "desc": "管理可怕的异想体并收集它们的能量。一款失败后果可怕的怪物管理模拟游戏。"
+            },
+            "ruina": {
+                "title": "废墟图书馆",
+                "desc": "成为神秘图书馆的馆长，将客人变成书。一款具有深度卡组构建机制的“图书馆战斗模拟”游戏。"
+            },
+            "limbus": {
+                "title": "边狱公司",
+                "desc": "带领 12 位罪人穿越都市，寻找黄金枝。一款具有电影风格的回合制 RPG。"
+            }
+        },
         "exploreTitle": "探索我们的游戏",
         "tools": "工具",
         "guides": "攻略",
@@ -142,5 +171,200 @@
         "savedTeams": "已保存的队伍",
         "noTeams": "你还没有保存任何队伍。",
         "useTeamBuilder": "使用配队工具创建并保存你的阵容。"
+    },
+    "lobotomy": {
+        "title": "脑叶公司",
+        "back": "← 返回脑叶公司",
+        "sephirahs": {
+            "title": "Sephirah 指南",
+            "subtitle": "了解每位部门主管以及如何完成他们的核心抑制",
+            "treeTitle": "卡巴拉生命之树",
+            "treeDesc": "每个部门都由一位 Sephirah 管理——依据卡巴拉生命之树结构建模的AI。完成他们的故事是了解脑叶公司背后真相的关键。",
+            "personality": "性格",
+            "meltdown": "⚠️ 核心抑制指南",
+            "reward": "🎁 核心抑制奖励",
+            "related": "相关角色：",
+            "spoilerTitle": "📖 剧透预警",
+            "spoilerDesc": "每位 Sephirah 都与设施黑暗历史紧密相关，拥有复杂的背景故事。完成他们的核心抑制将揭示脑叶公司背后的真相。",
+            "askAI": "🤖 询问剧情 AI"
+        },
+        "abnormalities": {
+            "title": "异想体数据库",
+            "subtitle": "可收容实体的完整百科全书。工作时请小心。",
+            "classified": "⚠️ 机密信息 - 未经授权访问异想体数据将受到脑叶公司协议的惩罚。",
+            "riskLevel": "{risk} 级",
+            "class": "级",
+            "maxPe": "最大 PE：",
+            "damage": "伤害类型：",
+            "workPref": "工作偏好：",
+            "special": "⚠️ 特殊注意：",
+            "sample": "这只是我们异想体数据库的样本。完整版包含 100+ 异想体。",
+            "signUp": "注册以获取完整访问权限"
+        },
+        "scheduler": {
+            "title": "⚙️ 工作调度器",
+            "subtitle": "规划你的每日工作轮换，最大化 PE 并减少伤亡",
+            "addAssignment": "添加工作分配",
+            "day": "天数",
+            "abnormality": "异想体",
+            "selectAbnormality": "选择异想体...",
+            "employee": "员工",
+            "selectEmployee": "选择员工...",
+            "workType": "工作类型",
+            "estimatedSuccess": "预计成功率：",
+            "addToSchedule": "+ 添加到日程表",
+            "tipsTitle": "💡 工作提示",
+            "tips": {
+                "t1": "• 根据异想体偏好匹配工作类型",
+                "t2": "• 使用高等级员工处理 ALEPH/WAW 异想体",
+                "t3": "• 注意员工的精神健康"
+            },
+            "scheduleTitle": "第 {day} 天日程表 ({count} 个工作指令)",
+            "emptyTitle": "📋",
+            "emptyDesc": "第 {day} 天没有工作指令",
+            "emptyTip": "使用左侧面板添加工作槽位",
+            "success": "成功率",
+            "estimatedPe": "预计 PE 产出：",
+            "weeklySummary": "周概况",
+            "dayLabel": "第 {day} 天"
+        },
+        "riskLevels": {
+            "title": "异想体风险等级",
+            "low": "低风险",
+            "moderate": "中等",
+            "high": "高风险",
+            "veryHigh": "极高",
+            "extreme": "极度危险"
+        },
+        "hero": {
+            "title": "脑叶公司",
+            "subtitle": "在世界上最危险的工作场所管理不可管理之物"
+        },
+        "tools": {
+            "abnormalities": {
+                "title": "异想体数据库",
+                "desc": "所有异想体的完整指南"
+            },
+            "sephirahs": {
+                "title": "Sephirah 指南",
+                "desc": "部门管理策略"
+            },
+            "scheduler": {
+                "title": "工作调度器",
+                "desc": "规划你的工作轮换",
+                "cta": "立即尝试 →"
+            }
+        },
+        "intro": {
+            "title": "第一章",
+            "p1": "脑叶公司是 Project Moon 宇宙的第一部作品，将玩家带入都市黑暗扭曲的世界。作为脑叶公司一个支部的经理，你的工作是收容被称为异想体的神秘实体并从中提取能源。",
+            "p2": "这款怪物管理模拟游戏挑战你在资源提取与员工安全之间取得平衡——当你的员工每天面对旧日支配者般的恐怖时，这是一项几乎不可能完成的任务。每一个决定都有后果，失败往往意味着员工遭遇可怕的命运。"
+        },
+        "premium": {
+            "title": "高级内容",
+            "desc": "Prime 会员可获取详细的策略指南",
+            "button": "立即解锁",
+            "blurredTitle": "高级异想体策略",
+            "blurredDesc": "处理最危险异想体的完整攻略..."
+        }
+    },
+    "ruina": {
+        "title": "废墟图书馆",
+        "back": "← 返回废墟图书馆",
+        "lore": {
+            "title": "剧情数据库",
+            "subtitle": "探索都市的角色、势力和事件",
+            "nav": {
+                "characters": "角色",
+                "factions": "势力",
+                "events": "事件"
+            },
+            "characters": {
+                "title": "👥 关键角色",
+                "playable": "可操作",
+                "faction": "势力：",
+                "quote": "相关台词"
+            },
+            "factions": {
+                "title": "🏛️ 势力与组织",
+                "philosophy": "理念：",
+                "members": "关键成员："
+            },
+            "tiers": {
+                "Head": "首脑",
+                "Wing": "翼",
+                "Fixer": "收尾人",
+                "Syndicate": "帮派",
+                "Claw": "爪牙",
+                "Finger": "手指",
+                "Other": "其他"
+            },
+            "events": {
+                "title": "📜 关键事件",
+                "early": "故事早期",
+                "mid": "故事中期",
+                "end": "终局"
+            },
+            "cta": {
+                "title": "对剧情有疑问？",
+                "desc": "使用我们的 AI 助手深入探索故事",
+                "button": "🤖 询问剧情 AI"
+            }
+        },
+        "hero": {
+            "title": "废墟图书馆",
+            "subtitle": "收集都市的书籍，揭开其最深层的秘密"
+        },
+        "tools": {
+            "loreAI": {
+                "title": "剧情 AI",
+                "desc": "询问有关故事和背景设定的问题",
+                "cta": "立即尝试 →"
+            },
+            "loreDB": {
+                "title": "剧情数据库",
+                "desc": "完整的世界观文档"
+            },
+            "deckBuilder": {
+                "title": "卡组构建器",
+                "desc": "构建并分享战斗书页卡组"
+            }
+        },
+        "loreAI": {
+            "title": "🤖 剧情 AI 助手",
+            "subtitle": "询问有关废墟图书馆的故事、角色和世界观建设的问题",
+            "welcome": "欢迎使用废墟图书馆剧情助手！📚\n\n我在这里帮助你理解废墟图书馆和都市的复杂叙事。请随意询问：\n\n• 角色及其背景\n• 势力和组织\n• 故事事件及其含义\n• 与脑叶公司的联系\n• 都市的世界观建设\n\n你想了解什么？",
+            "placeholder": "询问剧情...",
+            "ask": "提问",
+            "searching": "正在搜索图书馆...",
+            "tryAsking": "试着问：",
+            "questions": [
+                "谁是安吉拉，L 公司发生了什么？",
+                "什么是扭曲？",
+                "解释都市的收尾人等级系统",
+                "谁是漆黑噤默？",
+                "安吉拉和罗兰是什么关系？"
+            ],
+            "disclaimer": "⚠️ 剧透预警：助手可能会透露故事细节。如果你还没有通关游戏，请小心浏览。",
+            "assistantName": "📚 剧情助手",
+            "error": "抱歉，我目前无法处理你的问题。请稍后再试。"
+        },
+        "dataHelper": {
+            "title": "📚 剧情 AI 助手 - 即将推出",
+            "p1": "对废墟图书馆复杂的故事有疑问？",
+            "p2": "我们的 AI 剧情助手将帮助你通过：",
+            "features": {
+                "f1": "✓ 角色背景和关系",
+                "f2": "✓ 晦涩对话背后的含义",
+                "f3": "✓ 与脑叶公司的联系",
+                "f4": "✓ 都市的势力和权力结构"
+            },
+            "button": "⏳ 开发中"
+        },
+        "about": {
+            "title": "关于废墟图书馆",
+            "p1": "废墟图书馆是脑叶公司的续作，延续了安吉拉和第一部游戏事件后出现的神秘图书馆的故事。作为图书馆的新馆长，你将在戏剧性的卡牌战斗中面对来自都市各处的客人。",
+            "p2": "游戏拥有深度的卡组构建机制，来自都市各个角落的难忘角色，以及逐渐揭开 Project Moon 宇宙复杂设定的故事。"
+        }
     }
 }

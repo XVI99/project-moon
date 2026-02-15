@@ -1,30 +1,48 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { AdPlaceholder } from '@/components/ads/AdPlaceholder';
 
-export const metadata: Metadata = {
-    title: 'Library of Ruina Lore Explained + Deck Guide',
-    description: 'Dive into the Library of Ruina, the second game in the Project Moon universe. Complete lore explanations, deck building guides, and AI-powered Q&A.',
-    keywords: [
-        'library of ruina lore',
-        'library of ruina deck guide',
-        'library of ruina explained',
-        'library of ruina reception guide',
-        'library of ruina best decks',
-        'library of ruina story explained',
-    ],
+type Props = {
+    params: Promise<{ locale: string }>;
 };
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { locale } = await params;
+    const isZh = locale === 'zh';
+
+    return {
+        title: isZh
+            ? '废墟图书馆攻略 - 剧情解析 & AI助手'
+            : 'Library of Ruina Guide - Lore Explained & Deck Strategy',
+        description: isZh
+            ? '废墟图书馆完整攻略。AI剧情助手为你解析复杂的都市叙事，卡组构建指南、招待攻略、角色关系深度解读。'
+            : 'Complete Library of Ruina guide with AI-powered lore explanations, deck building strategies, reception walkthroughs, and deep dive into The City\'s narrative.',
+        keywords: isZh
+            ? ['废墟图书馆攻略', '废墟图书馆剧情', '废墟图书馆卡组', '废墟图书馆wiki', '废墟图书馆招待攻略']
+            : ['library of ruina lore', 'library of ruina deck guide', 'library of ruina explained', 'library of ruina reception guide', 'library of ruina best decks'],
+        alternates: {
+            canonical: `/${locale}/library-of-ruina`,
+            languages: {
+                en: '/en/library-of-ruina',
+                zh: '/zh/library-of-ruina',
+            },
+        },
+    };
+}
+
 export default function LibraryOfRuinaPage() {
+    const t = useTranslations('ruina');
+
     return (
         <div className="container mx-auto px-6 py-12 md:py-20">
             {/* Hero */}
             <section className="text-center">
                 <h1 className="text-4xl md:text-6xl font-serif font-bold text-white uppercase tracking-wider">
-                    Library of Ruina
+                    {t('hero.title')}
                 </h1>
                 <p className="mt-4 max-w-2xl mx-auto text-lg text-pm-gray-light">
-                    Collect the books of The City and uncover its deepest secrets
+                    {t('hero.subtitle')}
                 </p>
             </section>
 
@@ -36,13 +54,13 @@ export default function LibraryOfRuinaPage() {
                 >
                     <div className="text-4xl mb-3">🤖</div>
                     <h3 className="text-xl font-serif font-bold text-white group-hover:text-pm-gold transition-colors">
-                        Lore AI
+                        {t('tools.loreAI.title')}
                     </h3>
                     <p className="mt-2 text-sm text-pm-gray-light">
-                        Ask questions about the story and lore
+                        {t('tools.loreAI.desc')}
                     </p>
                     <span className="mt-4 inline-block text-pm-gold text-sm font-bold">
-                        Try it now →
+                        {t('tools.loreAI.cta')}
                     </span>
                 </Link>
 
@@ -52,10 +70,10 @@ export default function LibraryOfRuinaPage() {
                 >
                     <div className="text-4xl mb-3">📖</div>
                     <h3 className="text-xl font-serif font-bold text-white group-hover:text-pm-gold transition-colors">
-                        Lore Database
+                        {t('tools.loreDB.title')}
                     </h3>
                     <p className="mt-2 text-sm text-pm-gray-light">
-                        Complete world-building documentation
+                        {t('tools.loreDB.desc')}
                     </p>
                 </Link>
 
@@ -65,10 +83,10 @@ export default function LibraryOfRuinaPage() {
                 >
                     <div className="text-4xl mb-3">🃏</div>
                     <h3 className="text-xl font-serif font-bold text-white group-hover:text-pm-gold transition-colors">
-                        Deck Builder
+                        {t('tools.deckBuilder.title')}
                     </h3>
                     <p className="mt-2 text-sm text-pm-gray-light">
-                        Build and share combat page decks
+                        {t('tools.deckBuilder.desc')}
                     </p>
                 </Link>
             </section>
@@ -79,24 +97,25 @@ export default function LibraryOfRuinaPage() {
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         <div className="flex-1 text-center md:text-left">
                             <h2 className="text-2xl font-serif font-bold text-white mb-4">
-                                📚 Lore AI Assistant - Coming Soon
+                                {t('dataHelper.title')}
                             </h2>
                             <p className="text-pm-gray-light mb-6">
-                                Have questions about the Library of Ruina&apos;s complex story?
-                                Our AI-powered Lore Assistant will help you understand:
+                                {t('dataHelper.p1')}
+                                <br />
+                                {t('dataHelper.p2')}
                             </p>
                             <ul className="text-pm-gray-light text-left space-y-2 mb-6">
-                                <li>✓ Character backgrounds and relationships</li>
-                                <li>✓ The meaning behind cryptic dialogue</li>
-                                <li>✓ Connections to Lobotomy Corporation</li>
-                                <li>✓ The City&apos;s factions and power structures</li>
+                                <li>{t('dataHelper.features.f1')}</li>
+                                <li>{t('dataHelper.features.f2')}</li>
+                                <li>{t('dataHelper.features.f3')}</li>
+                                <li>{t('dataHelper.features.f4')}</li>
                             </ul>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                                 <button
                                     disabled
                                     className="bg-pm-gray-dark text-pm-gray-light font-bold py-3 px-6 rounded-lg cursor-not-allowed opacity-60"
                                 >
-                                    ⏳ Under Development
+                                    {t('dataHelper.button')}
                                 </button>
                             </div>
                         </div>
@@ -110,19 +129,14 @@ export default function LibraryOfRuinaPage() {
             {/* About the Game */}
             <section className="mt-16 max-w-4xl mx-auto">
                 <h2 className="text-3xl font-serif font-bold text-center text-white mb-6">
-                    About Library of Ruina
+                    {t('about.title')}
                 </h2>
                 <div className="text-pm-gray-light leading-relaxed space-y-4">
                     <p>
-                        Library of Ruina is the sequel to Lobotomy Corporation, continuing the story of
-                        Angela and the mysterious Library that emerged after the events of the first game.
-                        As the new director of the Library, you&apos;ll face guests from across The City in
-                        dramatic card-based battles.
+                        {t('about.p1')}
                     </p>
                     <p>
-                        The game features deep deck-building mechanics, memorable characters from all corners
-                        of The City, and a story that gradually unravels the complex lore of the Project Moon
-                        universe.
+                        {t('about.p2')}
                     </p>
                 </div>
             </section>

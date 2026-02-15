@@ -1,7 +1,14 @@
 import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
 import { SEPHIRAHS } from '@/lib/data/lobcorp/sephirahs';
+import { SEPHIRAHS_ZH } from '@/lib/data/lobcorp/sephirahs_zh';
 
 export default function SephirahsPage() {
+    const t = useTranslations('lobotomy.sephirahs');
+    const commonT = useTranslations('lobotomy');
+    const locale = useLocale();
+    const sephirahsData = locale === 'zh' ? SEPHIRAHS_ZH : SEPHIRAHS;
+
     return (
         <div className="container mx-auto px-6 py-12">
             {/* Header */}
@@ -10,13 +17,13 @@ export default function SephirahsPage() {
                     href="/lobotomy-corp"
                     className="text-pm-gray-light hover:text-pm-gold text-sm mb-4 inline-block"
                 >
-                    ← Back to Lobotomy Corporation
+                    {commonT('back')}
                 </Link>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-white">
-                    🔮 Sephirah Guides
+                    🔮 {t('title')}
                 </h1>
                 <p className="mt-2 text-pm-gray-light max-w-2xl mx-auto">
-                    Learn about each department head and how to complete their meltdowns
+                    {t('subtitle')}
                 </p>
             </div>
 
@@ -24,11 +31,10 @@ export default function SephirahsPage() {
             <div className="max-w-4xl mx-auto mb-12">
                 <div className="bg-pm-gray-dark/30 border border-pm-gray-dark rounded-lg p-6">
                     <h2 className="text-xl font-serif font-bold text-pm-gold mb-4 text-center">
-                        The Tree of Sephiroth
+                        {t('treeTitle')}
                     </h2>
                     <p className="text-pm-gray-light text-center mb-6">
-                        Each department is managed by a Sephirah - an AI modeled after the structure of the Kabbalah Tree of Life.
-                        Completing their stories is key to understanding the truth behind Lobotomy Corporation.
+                        {t('treeDesc')}
                     </p>
                     <div className="grid grid-cols-3 gap-4 text-center text-sm">
                         <div className="col-span-3 flex justify-center">
@@ -58,7 +64,7 @@ export default function SephirahsPage() {
 
             {/* Sephirah Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {SEPHIRAHS.map((sephirah) => (
+                {sephirahsData.map((sephirah) => (
                     <div
                         key={sephirah.id}
                         className="bg-pm-gray-dark/30 border border-pm-gray-dark rounded-lg p-5 hover:border-pm-gold transition-all"
@@ -79,7 +85,7 @@ export default function SephirahsPage() {
 
                         {/* Personality */}
                         <div className="mb-4">
-                            <h4 className="text-xs text-pm-gray-light/70 uppercase mb-1">Personality</h4>
+                            <h4 className="text-xs text-pm-gray-light/70 uppercase mb-1">{t('personality')}</h4>
                             <p className="text-sm text-white">
                                 {sephirah.personality}
                             </p>
@@ -87,7 +93,7 @@ export default function SephirahsPage() {
 
                         {/* Suppression Guide */}
                         <div className="bg-red-900/10 border border-red-500/30 rounded-lg p-3 mb-4">
-                            <h4 className="text-xs text-red-400 uppercase mb-1">⚠️ Meltdown Guide</h4>
+                            <h4 className="text-xs text-red-400 uppercase mb-1">{t('meltdown')}</h4>
                             <p className="text-sm text-pm-gray-light">
                                 {sephirah.suppressionGuide}
                             </p>
@@ -95,7 +101,7 @@ export default function SephirahsPage() {
 
                         {/* Quest Reward */}
                         <div className="bg-pm-gold/10 border border-pm-gold/30 rounded-lg p-3">
-                            <h4 className="text-xs text-pm-gold uppercase mb-1">🎁 Core Suppression Reward</h4>
+                            <h4 className="text-xs text-pm-gold uppercase mb-1">{t('reward')}</h4>
                             <p className="text-sm text-pm-gray-light">
                                 {sephirah.questReward}
                             </p>
@@ -105,7 +111,7 @@ export default function SephirahsPage() {
                         {sephirah.connections.length > 0 && (
                             <div className="mt-4 pt-3 border-t border-pm-gray-dark">
                                 <p className="text-xs text-pm-gray-light/70">
-                                    Related: {sephirah.connections.join(' • ')}
+                                    {t('related')} {sephirah.connections.join(' • ')}
                                 </p>
                             </div>
                         )}
@@ -117,17 +123,16 @@ export default function SephirahsPage() {
             <div className="max-w-4xl mx-auto mt-12">
                 <div className="bg-gradient-to-r from-pm-red/20 to-pm-gold/20 border border-pm-red/50 rounded-lg p-6 text-center">
                     <h3 className="text-xl font-serif font-bold text-white mb-2">
-                        📖 Story Spoiler Warning
+                        {t('spoilerTitle')}
                     </h3>
                     <p className="text-pm-gray-light mb-4">
-                        Each Sephirah has a complex backstory tied to the facility&apos;s dark history.
-                        Completing their Core Suppressions reveals the truth behind Lobotomy Corporation.
+                        {t('spoilerDesc')}
                     </p>
                     <Link
                         href="/library-of-ruina/lore-ai"
                         className="inline-block bg-pm-gold text-black font-bold py-2 px-6 rounded-lg hover:bg-yellow-500 transition-all"
                     >
-                        🤖 Ask the Lore AI
+                        {t('askAI')}
                     </Link>
                 </div>
             </div>

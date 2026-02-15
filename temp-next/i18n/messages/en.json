@@ -23,7 +23,36 @@
     },
     "home": {
         "title": "Project Moon Hub",
-        "subtitle": "Your ultimate companion for Project Moon games",
+        "subtitle": "Your companion for Project Moon games",
+        "hero": {
+            "title": "Face the Fear, Build the Future",
+            "subtitle": "Your definitive guide to the grim, captivating universe of Project Moon. Welcome to The City."
+        },
+        "video": {
+            "title": "Experience the Madness"
+        },
+        "intro": {
+            "title": "An Invitation to The City",
+            "p1": "The world of Project Moon is dominated by a single, sprawling megalopolis known only as The City. It is a place of stark contrasts, where unimaginable technology born from \"Singularities\" coexists with soul-crushing dystopia. The City is ruled by 26 hyper-corporate entities known as \"The Wings,\" each with its own laws, ethics, and monstrous power.",
+            "p2": "From the creature-containment halls of <strong class=\"text-white\">Lobotomy Corporation</strong>, to the fateful duels in the <strong class=\"text-white\">Library of Ruina</strong>, and the desperate pilgrimage of the Sinners in <strong class=\"text-white\">Limbus Company</strong>, every story is a struggle for survival, identity, and a sliver of humanity in a world that has forgotten its meaning. We are here to document it all."
+        },
+        "games": {
+            "title": "Choose Your Distortion",
+            "explore": "Explore Hub",
+            "steam": "View on Steam",
+            "lobotomy": {
+                "title": "Lobotomy Corp",
+                "desc": "Manage horrifying Abnormalities and harvest their energy. A monster management simulation where failure has dire consequences."
+            },
+            "ruina": {
+                "title": "Library of Ruina",
+                "desc": "Become the owner of a mystical Library and turn your guests into books. A \"Library Battle Simulation\" with deep deck-building mechanics."
+            },
+            "limbus": {
+                "title": "Limbus Company",
+                "desc": "Lead a team of 12 Sinners on a quest through The City to reclaim the Golden Boughs. A turn-based RPG with a cinematic flair."
+            }
+        },
         "exploreTitle": "Explore Our Games",
         "tools": "Tools",
         "guides": "Guides",
@@ -141,5 +170,200 @@
         "savedTeams": "Saved Teams",
         "noTeams": "You haven't saved any teams yet.",
         "useTeamBuilder": "Use the Team Builder to create and save your builds."
+    },
+    "lobotomy": {
+        "title": "Lobotomy Corporation",
+        "back": "← Back to Lobotomy Corporation",
+        "sephirahs": {
+            "title": "Sephirah Guides",
+            "subtitle": "Learn about each department head and how to complete their meltdowns",
+            "treeTitle": "The Tree of Sephiroth",
+            "treeDesc": "Each department is managed by a Sephirah - an AI modeled after the structure of the Kabbalah Tree of Life. Completing their stories is key to understanding the truth behind Lobotomy Corporation.",
+            "personality": "Personality",
+            "meltdown": "⚠️ Meltdown Guide",
+            "reward": "🎁 Core Suppression Reward",
+            "related": "Related:",
+            "spoilerTitle": "📖 Story Spoiler Warning",
+            "spoilerDesc": "Each Sephirah has a complex backstory tied to the facility's dark history. Completing their Core Suppressions reveals the truth behind Lobotomy Corporation.",
+            "askAI": "🤖 Ask the Lore AI"
+        },
+        "abnormalities": {
+            "title": "Abnormality Database",
+            "subtitle": "Complete encyclopedia of containable entities. Work with caution.",
+            "classified": "⚠️ CLASSIFIED INFORMATION - Unauthorized access to abnormality data is punishable under Lobotomy Corporation protocols.",
+            "riskLevel": "{risk} Class",
+            "class": "Class",
+            "maxPe": "Max PE:",
+            "damage": "Damage:",
+            "workPref": "Work Preferences:",
+            "special": "⚠️ Special Notes:",
+            "sample": "This is a sample of our abnormality database. The full version contains 100+ abnormalities.",
+            "signUp": "Sign Up for Full Access"
+        },
+        "scheduler": {
+            "title": "⚙️ Work Scheduler",
+            "subtitle": "Plan your daily work rotations to maximize PE and minimize casualties",
+            "addAssignment": "Add Work Assignment",
+            "day": "Day",
+            "abnormality": "Abnormality",
+            "selectAbnormality": "Select abnormality...",
+            "employee": "Employee",
+            "selectEmployee": "Select employee...",
+            "workType": "Work Type",
+            "estimatedSuccess": "Estimated Success:",
+            "addToSchedule": "+ Add to Schedule",
+            "tipsTitle": "💡 Work Tips",
+            "tips": {
+                "t1": "• Match work types to abnormality preferences",
+                "t2": "• High-level agents for ALEPH/WAW abnormalities",
+                "t3": "• Watch for employee mental health"
+            },
+            "scheduleTitle": "Day {day} Schedule ({count} work orders)",
+            "emptyTitle": "📋",
+            "emptyDesc": "No work orders for Day {day}",
+            "emptyTip": "Add work slots using the panel on the left",
+            "success": "Success",
+            "estimatedPe": "Estimated PE Output:",
+            "weeklySummary": "Weekly Summary",
+            "dayLabel": "Day {day}"
+        },
+        "hero": {
+            "title": "Lobotomy Corporation",
+            "subtitle": "Manage the unmanageable in the world's most dangerous workplace"
+        },
+        "tools": {
+            "abnormalities": {
+                "title": "Abnormality Database",
+                "desc": "Complete guides for all abnormalities"
+            },
+            "sephirahs": {
+                "title": "Sephirah Guides",
+                "desc": "Department management strategies"
+            },
+            "scheduler": {
+                "title": "Work Scheduler",
+                "desc": "Plan your work rotations",
+                "cta": "Try now →"
+            }
+        },
+        "intro": {
+            "title": "The First Chapter",
+            "p1": "Lobotomy Corporation is the first installment in the Project Moon universe, introducing players to the dark and twisted world of The City. As the manager of a wing of the Lobotomy Corporation, your job is to contain and extract energy from mysterious entities known as Abnormalities.",
+            "p2": "This monster management simulation challenges you to balance resource extraction with employee safety - a nearly impossible task when your workforce faces eldritch horrors daily. Every decision has consequences, and failure often means losing employees to gruesome fates."
+        },
+        "riskLevels": {
+            "title": "Abnormality Risk Levels",
+            "low": "Low Risk",
+            "moderate": "Moderate",
+            "high": "High Risk",
+            "veryHigh": "Very High",
+            "extreme": "Extreme"
+        },
+        "premium": {
+            "title": "Premium Content",
+            "desc": "Detailed strategy guides available for Prime members",
+            "button": "Unlock Now",
+            "blurredTitle": "Advanced Abnormality Strategies",
+            "blurredDesc": "Complete walkthroughs for handling the most dangerous abnormalities..."
+        }
+    },
+    "ruina": {
+        "title": "Library of Ruina",
+        "back": "← Back to Library of Ruina",
+        "lore": {
+            "title": "Lore Database",
+            "subtitle": "Explore the characters, factions, and events of The City",
+            "nav": {
+                "characters": "Characters",
+                "factions": "Factions",
+                "events": "Events"
+            },
+            "characters": {
+                "title": "👥 Key Characters",
+                "playable": "Playable",
+                "faction": "Faction:",
+                "quote": "Quote"
+            },
+            "factions": {
+                "title": "🏛️ Factions & Organizations",
+                "philosophy": "Philosophy:",
+                "members": "Key Members:"
+            },
+            "tiers": {
+                "Head": "The Head",
+                "Wing": "Wing",
+                "Fixer": "Fixer",
+                "Syndicate": "Syndicate",
+                "Claw": "Claw",
+                "Finger": "Finger",
+                "Other": "Other"
+            },
+            "events": {
+                "title": "📜 Key Events",
+                "early": "Early Story",
+                "mid": "Mid Story",
+                "end": "Endgame"
+            },
+            "cta": {
+                "title": "Have Questions About the Lore?",
+                "desc": "Use our AI assistant to explore the story in more depth",
+                "button": "🤖 Ask Lore AI"
+            }
+        },
+        "hero": {
+            "title": "Library of Ruina",
+            "subtitle": "Collect the books of The City and uncover its deepest secrets"
+        },
+        "tools": {
+            "loreAI": {
+                "title": "Lore AI",
+                "desc": "Ask questions about the story and lore",
+                "cta": "Try it now →"
+            },
+            "loreDB": {
+                "title": "Lore Database",
+                "desc": "Complete world-building documentation"
+            },
+            "deckBuilder": {
+                "title": "Deck Builder",
+                "desc": "Build and share combat page decks"
+            }
+        },
+        "loreAI": {
+            "title": "🤖 Lore AI Assistant",
+            "subtitle": "Ask questions about Library of Ruina's story, characters, and world-building",
+            "welcome": "Welcome to the Library of Ruina Lore Assistant! 📚\n\nI'm here to help you understand the complex narrative of Library of Ruina and The City. Feel free to ask about:\n\n• Characters and their backgrounds\n• Factions and organizations\n• Story events and their meaning\n• Connections to Lobotomy Corporation\n• The world-building of The City\n\nWhat would you like to know?",
+            "placeholder": "Ask about the lore...",
+            "ask": "Ask",
+            "searching": "Searching the Library...",
+            "tryAsking": "Try asking:",
+            "questions": [
+                "Who is Angela and what happened at L Corp?",
+                "What are Distortions?",
+                "Explain the Color system in The City",
+                "Who is The Black Silence?",
+                "What is the relationship between Angela and Roland?"
+            ],
+            "disclaimer": "⚠️ Spoiler Warning: The assistant may reveal story details. Navigate carefully if you haven't completed the game.",
+            "assistantName": "📚 Lore Assistant",
+            "error": "I apologize, but I'm currently unable to process your question. Please try again later."
+        },
+        "dataHelper": {
+            "title": "📚 Lore AI Assistant - Coming Soon",
+            "p1": "Have questions about the Library of Ruina's complex story?",
+            "p2": "Our AI-powered Lore Assistant will help you understand:",
+            "features": {
+                "f1": "✓ Character backgrounds and relationships",
+                "f2": "✓ The meaning behind cryptic dialogue",
+                "f3": "✓ Connections to Lobotomy Corporation",
+                "f4": "✓ The City's factions and power structures"
+            },
+            "button": "⏳ Under Development"
+        },
+        "about": {
+            "title": "About Library of Ruina",
+            "p1": "Library of Ruina is the sequel to Lobotomy Corporation, continuing the story of Angela and the mysterious Library that emerged after the events of the first game. As the new director of the Library, you'll face guests from across The City in dramatic card-based battles.",
+            "p2": "The game features deep deck-building mechanics, memorable characters from all corners of The City, and a story that gradually unravels the complex lore of the Project Moon universe."
+        }
     }
 }

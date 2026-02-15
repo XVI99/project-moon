@@ -11,20 +11,18 @@ interface Message {
     timestamp: Date;
 }
 
-const SAMPLE_QUESTIONS = [
-    "Who is Angela and what happened at L Corp?",
-    "What are Distortions?",
-    "Explain the Color system in The City",
-    "Who is The Black Silence?",
-    "What is the relationship between Angela and Roland?",
-];
-
 export default function LoreAIPage() {
+    const t = useTranslations('ruina.loreAI');
+    const tRuina = useTranslations('ruina'); // For back link
+
+    // Get questions as array
+    const sampleQuestions = t.raw('questions') as string[];
+
     const [messages, setMessages] = useState<Message[]>([
         {
             id: '1',
             role: 'assistant',
-            content: "Welcome to the Library of Ruina Lore Assistant! 📚\n\nI'm here to help you understand the complex narrative of Library of Ruina and The City. Feel free to ask about:\n\n• Characters and their backgrounds\n• Factions and organizations\n• Story events and their meaning\n• Connections to Lobotomy Corporation\n• The world-building of The City\n\nWhat would you like to know?",
+            content: t('welcome'),
             timestamp: new Date(),
         },
     ]);
@@ -73,7 +71,7 @@ export default function LoreAIPage() {
             const errorMessage: Message = {
                 id: (Date.now() + 1).toString(),
                 role: 'assistant',
-                content: "I apologize, but I'm currently unable to process your question. Please try again later.",
+                content: t('error'),
                 timestamp: new Date(),
             };
             setMessages(prev => [...prev, errorMessage]);
@@ -90,13 +88,13 @@ export default function LoreAIPage() {
                     href="/library-of-ruina"
                     className="text-pm-gray-light hover:text-pm-gold text-sm mb-4 inline-block"
                 >
-                    ← Back to Library of Ruina
+                    {tRuina('back')}
                 </Link>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-white">
-                    🤖 Lore AI Assistant
+                    {t('title')}
                 </h1>
                 <p className="mt-2 text-pm-gray-light max-w-2xl mx-auto">
-                    Ask questions about Library of Ruina&apos;s story, characters, and world-building
+                    {t('subtitle')}
                 </p>
             </div>
 
@@ -118,7 +116,7 @@ export default function LoreAIPage() {
                                 >
                                     {message.role === 'assistant' && (
                                         <div className="flex items-center gap-2 mb-2 text-pm-gold font-bold text-sm">
-                                            <span>📚</span> Lore Assistant
+                                            <span>📚</span> {t('assistantName')}
                                         </div>
                                     )}
                                     <div className="whitespace-pre-wrap">
@@ -132,7 +130,7 @@ export default function LoreAIPage() {
                                 <div className="bg-pm-gray-dark/60 rounded-lg p-4">
                                     <div className="flex items-center gap-2">
                                         <span className="animate-pulse">📚</span>
-                                        <span className="text-pm-gray-light">Searching the Library...</span>
+                                        <span className="text-pm-gray-light">{t('searching')}</span>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +151,7 @@ export default function LoreAIPage() {
                                 type="text"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
-                                placeholder="Ask about the lore..."
+                                placeholder={t('placeholder')}
                                 disabled={isLoading}
                                 className="flex-1 bg-pm-black border border-pm-gray-dark rounded-lg px-4 py-2 text-white placeholder:text-pm-gray-light/50 focus:border-pm-gold focus:outline-none"
                             />
@@ -162,7 +160,7 @@ export default function LoreAIPage() {
                                 disabled={isLoading || !input.trim()}
                                 className="bg-pm-gold text-black font-bold px-6 py-2 rounded-lg hover:bg-yellow-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Ask
+                                {t('ask')}
                             </button>
                         </form>
                     </div>
@@ -170,9 +168,9 @@ export default function LoreAIPage() {
 
                 {/* Sample Questions */}
                 <div className="mt-6">
-                    <h3 className="text-sm text-pm-gray-light mb-3">Try asking:</h3>
+                    <h3 className="text-sm text-pm-gray-light mb-3">{t('tryAsking')}</h3>
                     <div className="flex flex-wrap gap-2">
-                        {SAMPLE_QUESTIONS.map((q, i) => (
+                        {sampleQuestions.map((q, i) => (
                             <button
                                 key={i}
                                 onClick={() => handleSubmit(q)}
@@ -187,7 +185,7 @@ export default function LoreAIPage() {
 
                 {/* Disclaimer */}
                 <p className="mt-6 text-center text-xs text-pm-gray-light/50">
-                    ⚠️ Spoiler Warning: The assistant may reveal story details. Navigate carefully if you haven&apos;t completed the game.
+                    {t('disclaimer')}
                 </p>
             </div>
         </div>

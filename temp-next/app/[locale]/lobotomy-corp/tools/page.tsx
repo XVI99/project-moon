@@ -2,7 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
 import { ABNORMALITIES, RISK_COLORS, type Abnormality, type RiskLevel } from '@/lib/data/lobcorp/abnormalities';
+import { ABNORMALITIES_ZH } from '@/lib/data/lobcorp/abnormalities_zh';
 
 interface WorkSlot {
     day: number;
@@ -31,6 +33,10 @@ const SAMPLE_EMPLOYEES: Employee[] = [
 ];
 
 export default function ToolsPage() {
+    const t = useTranslations('lobotomy.scheduler');
+    const locale = useLocale();
+    const abnormalitiesData = locale === 'zh' ? ABNORMALITIES_ZH : ABNORMALITIES;
+
     const [schedule, setSchedule] = useState<WorkSlot[]>([]);
     const [selectedAbnormality, setSelectedAbnormality] = useState<string>('');
     const [selectedEmployee, setSelectedEmployee] = useState<string>('');
@@ -74,13 +80,13 @@ export default function ToolsPage() {
                     href="/lobotomy-corp"
                     className="text-pm-gray-light hover:text-pm-gold text-sm mb-4 inline-block"
                 >
-                    ← Back to Lobotomy Corporation
+                    {useTranslations('lobotomy')('back')}
                 </Link>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-white">
-                    ⚙️ Work Scheduler
+                    {t('title')}
                 </h1>
                 <p className="mt-2 text-pm-gray-light max-w-2xl mx-auto">
-                    Plan your daily work rotations to maximize PE and minimize casualties
+                    {t('subtitle')}
                 </p>
             </div>
 
@@ -88,11 +94,11 @@ export default function ToolsPage() {
                 {/* Left: Add Work Slot */}
                 <div className="lg:col-span-1 space-y-4">
                     <div className="bg-pm-gray-dark/30 border border-pm-gray-dark rounded-lg p-4">
-                        <h3 className="text-lg font-bold text-white mb-4">Add Work Assignment</h3>
+                        <h3 className="text-lg font-bold text-white mb-4">{t('addAssignment')}</h3>
 
                         {/* Day Selector */}
                         <div className="mb-4">
-                            <label className="text-sm text-pm-gray-light block mb-1">Day</label>
+                            <label className="text-sm text-pm-gray-light block mb-1">{t('day')}</label>
                             <div className="flex gap-2">
                                 {[1, 2, 3, 4, 5].map(day => (
                                     <button
@@ -111,14 +117,14 @@ export default function ToolsPage() {
 
                         {/* Abnormality Selector */}
                         <div className="mb-4">
-                            <label className="text-sm text-pm-gray-light block mb-1">Abnormality</label>
+                            <label className="text-sm text-pm-gray-light block mb-1">{t('abnormality')}</label>
                             <select
                                 value={selectedAbnormality}
                                 onChange={(e) => setSelectedAbnormality(e.target.value)}
                                 className="w-full bg-pm-black border border-pm-gray-dark rounded-lg px-3 py-2 text-white"
                             >
-                                <option value="">Select abnormality...</option>
-                                {ABNORMALITIES.map(a => (
+                                <option value="">{t('selectAbnormality')}</option>
+                                {abnormalitiesData.map(a => (
                                     <option key={a.id} value={a.id}>
                                         [{a.riskLevel}] {a.name}
                                     </option>
@@ -128,13 +134,13 @@ export default function ToolsPage() {
 
                         {/* Employee Selector */}
                         <div className="mb-4">
-                            <label className="text-sm text-pm-gray-light block mb-1">Employee</label>
+                            <label className="text-sm text-pm-gray-light block mb-1">{t('employee')}</label>
                             <select
                                 value={selectedEmployee}
                                 onChange={(e) => setSelectedEmployee(e.target.value)}
                                 className="w-full bg-pm-black border border-pm-gray-dark rounded-lg px-3 py-2 text-white"
                             >
-                                <option value="">Select employee...</option>
+                                <option value="">{t('selectEmployee')}</option>
                                 {SAMPLE_EMPLOYEES.map(emp => (
                                     <option key={emp.name} value={emp.name}>
                                         {emp.name} (Lv.{emp.level})
@@ -145,7 +151,7 @@ export default function ToolsPage() {
 
                         {/* Work Type */}
                         <div className="mb-4">
-                            <label className="text-sm text-pm-gray-light block mb-1">Work Type</label>
+                            <label className="text-sm text-pm-gray-light block mb-1">{t('workType')}</label>
                             <div className="grid grid-cols-2 gap-2">
                                 {(['Instinct', 'Insight', 'Attachment', 'Repression'] as const).map(type => (
                                     <button
@@ -165,10 +171,10 @@ export default function ToolsPage() {
                         {/* Success Preview */}
                         {selectedAbnormality && selectedEmployee && (
                             <div className="mb-4 bg-pm-black/50 rounded-lg p-3">
-                                <p className="text-sm text-pm-gray-light">Estimated Success:</p>
+                                <p className="text-sm text-pm-gray-light">{t('estimatedSuccess')}</p>
                                 <p className="text-2xl font-bold text-pm-gold">
                                     {getSuccessChance(
-                                        ABNORMALITIES.find(a => a.id === selectedAbnormality),
+                                        abnormalitiesData.find(a => a.id === selectedAbnormality),
                                         SAMPLE_EMPLOYEES.find(e => e.name === selectedEmployee),
                                         selectedWorkType
                                     )}%
@@ -181,17 +187,17 @@ export default function ToolsPage() {
                             disabled={!selectedAbnormality || !selectedEmployee}
                             className="w-full bg-pm-gold text-black font-bold py-2 rounded-lg hover:bg-yellow-500 transition-all disabled:opacity-50"
                         >
-                            + Add to Schedule
+                            {t('addToSchedule')}
                         </button>
                     </div>
 
                     {/* Tips */}
                     <div className="bg-yellow-900/20 border border-yellow-500/50 rounded-lg p-4">
-                        <h4 className="text-yellow-400 font-bold mb-2">💡 Work Tips</h4>
+                        <h4 className="text-yellow-400 font-bold mb-2">{t('tipsTitle')}</h4>
                         <ul className="text-sm text-yellow-400/80 space-y-1">
-                            <li>• Match work types to abnormality preferences</li>
-                            <li>• High-level agents for ALEPH/WAW abnormalities</li>
-                            <li>• Watch for employee mental health</li>
+                            <li>{t('tips.t1')}</li>
+                            <li>{t('tips.t2')}</li>
+                            <li>{t('tips.t3')}</li>
                         </ul>
                     </div>
                 </div>
@@ -200,21 +206,23 @@ export default function ToolsPage() {
                 <div className="lg:col-span-2">
                     <div className="bg-pm-gray-dark/30 border border-pm-gray-dark rounded-lg p-4">
                         <h3 className="text-lg font-bold text-white mb-4">
-                            Day {currentDay} Schedule ({todaySchedule.length} work orders)
+                            {t('scheduleTitle', { day: currentDay, count: todaySchedule.length })}
                         </h3>
 
                         {todaySchedule.length === 0 ? (
                             <div className="text-center py-12 text-pm-gray-light">
-                                <p className="text-4xl mb-4">📋</p>
-                                <p>No work orders for Day {currentDay}</p>
-                                <p className="text-sm">Add work slots using the panel on the left</p>
+                                <p className="text-4xl mb-4">{t('emptyTitle')}</p>
+                                <p>{t('emptyDesc', { day: currentDay })}</p>
+                                <p className="text-sm">{t('emptyTip')}</p>
                             </div>
                         ) : (
                             <div className="space-y-3">
                                 {todaySchedule.map((slot, index) => {
-                                    const abnormality = ABNORMALITIES.find(a => a.id === slot.abnormalityId);
+                                    const abnormality = abnormalitiesData.find(a => a.id === slot.abnormalityId);
                                     const employee = SAMPLE_EMPLOYEES.find(e => e.name === slot.employeeName);
-                                    const colors = abnormality ? RISK_COLORS[abnormality.riskLevel] : RISK_COLORS.ZAYIN;
+                                    // Use English risk level for color mapping if needed, or ensure RISK_COLORS handles localized keys if they differ
+                                    // Assuming RISK_COLORS keys are 'ZAYIN', 'TETH' etc. which are standard.
+                                    const colors = abnormality ? RISK_COLORS[abnormality.riskLevel as RiskLevel] || RISK_COLORS.ZAYIN : RISK_COLORS.ZAYIN;
 
                                     return (
                                         <div
@@ -234,7 +242,7 @@ export default function ToolsPage() {
                                                 </p>
                                             </div>
                                             <div className="text-center">
-                                                <p className="text-xs text-pm-gray-light">Success</p>
+                                                <p className="text-xs text-pm-gray-light">{t('success')}</p>
                                                 <p className={`font-bold ${getSuccessChance(abnormality, employee, slot.workType) >= 70 ? 'text-green-400' : 'text-yellow-400'}`}>
                                                     {getSuccessChance(abnormality, employee, slot.workType)}%
                                                 </p>
@@ -254,10 +262,10 @@ export default function ToolsPage() {
                         {/* Total PE Preview */}
                         {todaySchedule.length > 0 && (
                             <div className="mt-4 pt-4 border-t border-pm-gray-dark flex justify-between items-center">
-                                <span className="text-pm-gray-light">Estimated PE Output:</span>
+                                <span className="text-pm-gray-light">{t('estimatedPe')}</span>
                                 <span className="text-2xl font-bold text-pm-gold">
                                     {todaySchedule.reduce((sum, slot) => {
-                                        const abnormality = ABNORMALITIES.find(a => a.id === slot.abnormalityId);
+                                        const abnormality = abnormalitiesData.find(a => a.id === slot.abnormalityId);
                                         return sum + (abnormality?.maxEnergy || 0);
                                     }, 0)} PE
                                 </span>
@@ -267,13 +275,13 @@ export default function ToolsPage() {
 
                     {/* Schedule Summary */}
                     <div className="mt-4 bg-pm-gray-dark/30 border border-pm-gray-dark rounded-lg p-4">
-                        <h4 className="font-bold text-white mb-2">Weekly Summary</h4>
+                        <h4 className="font-bold text-white mb-2">{t('weeklySummary')}</h4>
                         <div className="flex gap-4 text-sm">
                             {[1, 2, 3, 4, 5].map(day => {
                                 const daySchedule = schedule.filter(s => s.day === day);
                                 return (
                                     <div key={day} className="flex-1 text-center">
-                                        <p className="text-pm-gray-light">Day {day}</p>
+                                        <p className="text-pm-gray-light">{t('dayLabel', { day })}</p>
                                         <p className="text-pm-gold font-bold">{daySchedule.length}</p>
                                     </div>
                                 );

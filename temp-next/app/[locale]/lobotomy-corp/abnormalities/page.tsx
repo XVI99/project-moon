@@ -1,11 +1,24 @@
 import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
 import { ABNORMALITIES, RISK_COLORS, DAMAGE_COLORS, sortByRisk, type RiskLevel } from '@/lib/data/lobcorp/abnormalities';
+import { ABNORMALITIES_ZH } from '@/lib/data/lobcorp/abnormalities_zh';
 
 export default function AbnormalitiesPage() {
-    const sortedAbnormalities = sortByRisk(ABNORMALITIES);
+    const t = useTranslations('lobotomy.abnormalities');
+    const commonT = useTranslations('lobotomy');
+    const locale = useLocale();
+    const abnormalitiesData = locale === 'zh' ? ABNORMALITIES_ZH : ABNORMALITIES;
+
+    // Sort logic using the localized data
+    // We need to reimplement sortByRisk because it expects the specific array type, 
+    // but the structure is identical so we can just reuse the function or logic.
+    // However, sortByRisk imports from english file. Let's look at its impl.
+    // It uses getRiskLevelOrder. That function is generic on RiskLevel string.
+    // The data objects are compatible.
+    const sortedAbnormalities = sortByRisk(abnormalitiesData);
 
     // Group by risk level
-    const abnormalitiesByRisk = ABNORMALITIES.reduce((acc, abnormality) => {
+    const abnormalitiesByRisk = abnormalitiesData.reduce((acc, abnormality) => {
         if (!acc[abnormality.riskLevel]) acc[abnormality.riskLevel] = [];
         acc[abnormality.riskLevel].push(abnormality);
         return acc;
@@ -21,13 +34,13 @@ export default function AbnormalitiesPage() {
                     href="/lobotomy-corp"
                     className="text-pm-gray-light hover:text-pm-gold text-sm mb-4 inline-block"
                 >
-                    ← Back to Lobotomy Corporation
+                    {commonT('back')}
                 </Link>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-white">
-                    👁️ Abnormality Database
+                    👁️ {t('title')}
                 </h1>
                 <p className="mt-2 text-pm-gray-light max-w-2xl mx-auto">
-                    Complete encyclopedia of containable entities. Work with caution.
+                    {t('subtitle')}
                 </p>
             </div>
 
@@ -54,7 +67,7 @@ export default function AbnormalitiesPage() {
             {/* Warning */}
             <div className="max-w-4xl mx-auto mb-10 bg-red-900/20 border border-red-500/50 rounded-lg p-4">
                 <p className="text-red-400 text-sm text-center">
-                    ⚠️ <strong>CLASSIFIED INFORMATION</strong> - Unauthorized access to abnormality data is punishable under Lobotomy Corporation protocols.
+                    {t('classified')}
                 </p>
             </div>
 
@@ -71,7 +84,7 @@ export default function AbnormalitiesPage() {
                             <span className={`${colors.bg} w-8 h-8 rounded-full flex items-center justify-center text-white text-sm`}>
                                 {risk[0]}
                             </span>
-                            {risk} Class ({abnormalities.length})
+                            {t('riskLevel', { risk })} ({abnormalities.length})
                         </h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -105,18 +118,18 @@ export default function AbnormalitiesPage() {
                                         {/* Stats */}
                                         <div className="grid grid-cols-2 gap-2 text-xs mb-3">
                                             <div className="bg-pm-black/30 rounded p-2">
-                                                <span className="text-pm-gray-light">Max PE:</span>
+                                                <span className="text-pm-gray-light">{t('maxPe')}</span>
                                                 <span className="text-pm-gold float-right font-bold">{abnormality.maxEnergy}</span>
                                             </div>
                                             <div className={`${damageColors.bg} rounded p-2`}>
-                                                <span className={damageColors.text}>Damage:</span>
+                                                <span className={damageColors.text}>{t('damage')}</span>
                                                 <span className={`${damageColors.text} float-right font-bold`}>{abnormality.damageType}</span>
                                             </div>
                                         </div>
 
                                         {/* Work Preferences */}
                                         <div className="mb-3">
-                                            <p className="text-xs text-pm-gray-light mb-1">Work Preferences:</p>
+                                            <p className="text-xs text-pm-gray-light mb-1">{t('workPref')}</p>
                                             <div className="flex flex-wrap gap-1">
                                                 {Object.entries(abnormality.workPreference).map(([work, quality]) => (
                                                     <span
@@ -136,7 +149,7 @@ export default function AbnormalitiesPage() {
                                         {/* Special Notes */}
                                         {abnormality.specialNotes.length > 0 && (
                                             <div className="border-t border-pm-gray-dark pt-2">
-                                                <p className="text-xs text-pm-red mb-1">⚠️ Special Notes:</p>
+                                                <p className="text-xs text-pm-red mb-1">{t('special')}</p>
                                                 <ul className="text-xs text-pm-gray-light space-y-0.5">
                                                     {abnormality.specialNotes.slice(0, 2).map((note, i) => (
                                                         <li key={i}>• {note}</li>
@@ -155,13 +168,13 @@ export default function AbnormalitiesPage() {
             {/* Add More CTA */}
             <section className="text-center mt-12 py-8 border-t border-pm-gray-dark">
                 <p className="text-pm-gray-light mb-4">
-                    This is a sample of our abnormality database. The full version contains 100+ abnormalities.
+                    {t('sample')}
                 </p>
                 <Link
                     href="/signup"
                     className="inline-block bg-pm-gold text-black font-bold py-2 px-6 rounded-lg hover:bg-yellow-500 transition-all"
                 >
-                    Sign Up for Full Access
+                    {t('signUp')}
                 </Link>
             </section>
         </div>

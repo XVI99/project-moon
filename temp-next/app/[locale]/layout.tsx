@@ -5,6 +5,8 @@ import { getMessages } from "next-intl/server";
 import { Analytics } from '@vercel/analytics/react';
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { WebsiteJsonLd } from "@/components/JsonLd";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -20,15 +22,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const isZh = locale === 'zh';
 
     return {
+        metadataBase: new URL('https://projectmoonhub.site'),
         title: {
             default: isZh
-                ? "Project Moon Hub - 都市的入口"
-                : "Project Moon Hub - Your Gateway to The City",
+                ? "Project Moon Hub - 脑叶公司·废墟图书馆·边狱公司攻略站"
+                : "Project Moon Hub - Lobotomy Corp, Library of Ruina & Limbus Company Guide",
             template: "%s | Project Moon Hub",
         },
         description: isZh
-            ? "深入探索脑叶公司、废墟图书馆和边狱公司的复杂世界。在这个终极粉丝中心探索都市的传说、角色和残酷现实。"
-            : "Dive into the intricate worlds of Lobotomy Corporation, Library of Ruina, and Limbus Company. Explore the lore, characters, and grim realities of The City at the ultimate fan hub.",
+            ? "Project Moon 全系列游戏攻略站。脑叶公司异想体数据库、废墟图书馆剧情解析、边狱公司AI配队工具与镜像地牢流派推荐。都市传说、角色攻略一站汇聚。"
+            : "The ultimate Project Moon fan hub featuring Limbus Company AI team builder & tier list, Library of Ruina lore database, and Lobotomy Corporation abnormality guides. Explore The City now.",
         keywords: [
             "Project Moon",
             "Limbus Company",
@@ -38,29 +41,44 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             isZh ? "配队" : "tier list",
             isZh ? "攻略" : "team builder",
             isZh ? "指南" : "guide",
+            isZh ? "镜像地牢" : "mirror dungeon",
+            isZh ? "异想体" : "abnormality",
         ],
         authors: [{ name: "Project Moon Hub" }],
         creator: "Project Moon Hub",
+        alternates: {
+            canonical: `/${locale}`,
+            languages: {
+                en: '/en',
+                zh: '/zh',
+            },
+        },
         openGraph: {
             type: "website",
             locale: locale === 'zh' ? 'zh_CN' : 'en_US',
-            url: "https://projectmoonhub.site",
+            url: `https://projectmoonhub.site/${locale}`,
             siteName: "Project Moon Hub",
-            title: isZh ? "Project Moon Hub - 都市的入口" : "Project Moon Hub - Your Gateway to The City",
-            description: isZh ? "脑叶公司、废墟图书馆和边狱公司终极粉丝中心" : "The ultimate fan hub for Lobotomy Corporation, Library of Ruina, and Limbus Company.",
+            title: isZh
+                ? "Project Moon Hub - 脑叶公司·废墟图书馆·边狱公司攻略站"
+                : "Project Moon Hub - Lobotomy Corp, Library of Ruina & Limbus Company Guide",
+            description: isZh
+                ? "脑叶公司异想体数据库、废墟图书馆剧情AI、边狱公司AI配队工具，Project Moon 粉丝终极攻略中心"
+                : "Limbus Company AI team builder, Library of Ruina lore AI, Lobotomy Corp abnormality database - the ultimate Project Moon fan hub.",
             images: [
                 {
                     url: "/og-image.png",
                     width: 1200,
                     height: 630,
-                    alt: "Project Moon Hub",
+                    alt: "Project Moon Hub - The City Awaits",
                 },
             ],
         },
         twitter: {
             card: "summary_large_image",
-            title: "Project Moon Hub",
-            description: isZh ? "Project Moon 游戏终极粉丝中心" : "The ultimate fan hub for Project Moon games",
+            title: isZh ? "Project Moon Hub - 攻略·配队·剧情" : "Project Moon Hub - Guides, Team Builder & Lore",
+            description: isZh
+                ? "脑叶公司·废墟图书馆·边狱公司 全系列攻略站"
+                : "Your ultimate companion for Lobotomy Corp, Library of Ruina & Limbus Company",
             images: ["/og-image.png"],
         },
         robots: {
@@ -94,6 +112,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     return (
         <html lang={locale} className="scroll-smooth">
             <body className="bg-pm-black text-pm-gray-light antialiased min-h-screen flex flex-col">
+                <WebsiteJsonLd locale={locale} />
                 <NextIntlClientProvider messages={messages}>
                     <Header />
                     <main className="flex-grow">
@@ -102,6 +121,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                     <Footer />
                 </NextIntlClientProvider>
                 <Analytics />
+                <GoogleAnalytics />
             </body>
         </html>
     );

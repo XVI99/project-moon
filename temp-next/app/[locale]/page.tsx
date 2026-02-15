@@ -1,27 +1,25 @@
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { AdPlaceholder } from '@/components/ads/AdPlaceholder';
 
 // Game cards data
 const games = [
   {
-    title: 'Lobotomy Corp',
-    description: 'Manage horrifying Abnormalities and harvest their energy. A monster management simulation where failure has dire consequences.',
+    id: 'lobotomy',
     href: '/lobotomy-corp',
     steamUrl: 'https://store.steampowered.com/app/568220/Lobotomy_Corporation__Monster_Management_Simulation/',
     color: 'pm-red',
     borderHover: 'hover:border-pm-red',
   },
   {
-    title: 'Library of Ruina',
-    description: 'Become the owner of a mystical Library and turn your guests into books. A "Library Battle Simulation" with deep deck-building mechanics.',
+    id: 'ruina',
     href: '/library-of-ruina',
     steamUrl: 'https://store.steampowered.com/app/1256670/Library_Of_Ruina/',
     color: 'pm-gold',
     borderHover: 'hover:border-pm-gold',
   },
   {
-    title: 'Limbus Company',
-    description: 'Lead a team of 12 Sinners on a quest through The City to reclaim the Golden Boughs. A turn-based RPG with a cinematic flair.',
+    id: 'limbus',
     href: '/limbus-company',
     steamUrl: 'https://store.steampowered.com/app/1973530/Limbus_Company/',
     color: 'pm-red',
@@ -30,22 +28,24 @@ const games = [
 ];
 
 export default function Home() {
+  const t = useTranslations('home');
+
   return (
     <div className="container mx-auto px-6 py-12 md:py-20">
       {/* Hero Section */}
       <section className="text-center">
         <h1 className="text-4xl md:text-6xl font-serif font-bold text-white uppercase tracking-wider">
-          Face the Fear<span className="text-pm-red">,</span> Build the Future
+          {t('hero.title')}
         </h1>
         <p className="mt-4 max-w-2xl mx-auto text-lg text-pm-gray-light">
-          Your definitive guide to the grim, captivating universe of Project Moon. Welcome to The City.
+          {t('hero.subtitle')}
         </p>
       </section>
 
       {/* Video Section */}
       <section className="mt-12 md:mt-20">
         <h2 className="text-3xl font-serif font-bold text-center text-white mb-6">
-          Experience the Madness
+          {t('video.title')}
         </h2>
         <div
           className="max-w-4xl mx-auto rounded-lg overflow-hidden shadow-lg shadow-pm-red/20"
@@ -64,21 +64,16 @@ export default function Home() {
       {/* Introduction Section */}
       <section className="mt-12 md:mt-20 max-w-4xl mx-auto">
         <h2 className="text-3xl font-serif font-bold text-center text-white mb-6">
-          An Invitation to The City
+          {t('intro.title')}
         </h2>
         <div className="text-left space-y-4 text-pm-gray-light leading-relaxed">
           <p>
-            The world of Project Moon is dominated by a single, sprawling megalopolis known only as The City.
-            It is a place of stark contrasts, where unimaginable technology born from &quot;Singularities&quot;
-            coexists with soul-crushing dystopia. The City is ruled by 26 hyper-corporate entities known as
-            &quot;The Wings,&quot; each with its own laws, ethics, and monstrous power.
+            {t.rich('intro.p1')}
           </p>
           <p>
-            From the creature-containment halls of <strong className="text-white">Lobotomy Corporation</strong>,
-            to the fateful duels in the <strong className="text-white">Library of Ruina</strong>,
-            and the desperate pilgrimage of the Sinners in <strong className="text-white">Limbus Company</strong>,
-            every story is a struggle for survival, identity, and a sliver of humanity in a world that has
-            forgotten its meaning. We are here to document it all.
+            {t.rich('intro.p2', {
+              strong: (chunks) => <strong className="text-white">{chunks}</strong>
+            })}
           </p>
         </div>
       </section>
@@ -86,12 +81,12 @@ export default function Home() {
       {/* Games Grid */}
       <section className="mt-12 md:mt-20">
         <h2 className="text-3xl font-serif font-bold text-center text-white mb-8">
-          Choose Your Distortion
+          {t('games.title')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {games.map((game) => (
             <div
-              key={game.title}
+              key={game.id}
               className={`
                 bg-pm-gray-dark/50 p-6 rounded-lg 
                 border border-pm-gray-dark 
@@ -101,10 +96,10 @@ export default function Home() {
               `}
             >
               <h3 className="text-2xl font-serif font-bold text-white mb-2">
-                {game.title}
+                {t(`games.${game.id}.title`)}
               </h3>
               <p className="mb-4 text-pm-gray-light">
-                {game.description}
+                {t(`games.${game.id}.desc`)}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link
@@ -117,7 +112,7 @@ export default function Home() {
                     }
                   `}
                 >
-                  Explore Hub
+                  {t('games.explore')}
                 </Link>
                 <a
                   href={game.steamUrl}
@@ -125,7 +120,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="inline-block bg-pm-gray-dark text-pm-gray-light font-bold py-2 px-4 rounded border border-pm-gray-dark hover:border-pm-gray-light transition-colors"
                 >
-                  View on Steam
+                  {t('games.steam')}
                 </a>
               </div>
             </div>

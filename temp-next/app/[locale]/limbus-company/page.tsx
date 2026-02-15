@@ -1,47 +1,52 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AdPlaceholder } from '@/components/ads/AdPlaceholder';
+import { useTranslations, useLocale } from 'next-intl';
+import { SINNERS } from '@/lib/data/limbus/sinners';
+import { SINNERS_ZH } from '@/lib/data/limbus/sinners_zh';
 
-export const metadata: Metadata = {
-    title: 'Limbus Company Tier List & AI Team Builder 2026',
-    description: 'Build the best Mirror Dungeon teams with our AI-powered team builder. Tier lists, Sinner guides, E.G.O recommendations - all in one place.',
-    keywords: [
-        'limbus company tier list',
-        'limbus company team builder',
-        'mirror dungeon guide',
-        'limbus company best team',
-        'limbus company tier list 2026',
-        'limbus company sinner guide',
-        'limbus company ego tier list',
-    ],
+type Props = {
+    params: Promise<{ locale: string }>;
 };
 
-// Sinners data - will be expanded with full data from Wiki scraper
-const sinners = [
-    { id: 'yi-sang', name: 'Yi Sang', affiliation: 'Molar Office' },
-    { id: 'faust', name: 'Faust', affiliation: 'Molar Office' },
-    { id: 'don-quixote', name: 'Don Quixote', affiliation: 'La Manchaland' },
-    { id: 'ryoshu', name: 'Ryōshū', affiliation: 'Atelieryōshū' },
-    { id: 'meursault', name: 'Meursault', affiliation: 'Unknown' },
-    { id: 'hong-lu', name: 'Hong Lu', affiliation: 'Hong Family' },
-    { id: 'heathcliff', name: 'Heathcliff', affiliation: 'Unknown' },
-    { id: 'ishmael', name: 'Ishmael', affiliation: 'Unknown' },
-    { id: 'rodion', name: 'Rodion', affiliation: 'Unknown' },
-    { id: 'sinclair', name: 'Sinclair', affiliation: 'Unknown' },
-    { id: 'outis', name: 'Outis', affiliation: 'Unknown' },
-    { id: 'gregor', name: 'Gregor', affiliation: 'Unknown' },
-];
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { locale } = await params;
+    const isZh = locale === 'zh';
+
+    return {
+        title: isZh
+            ? '边狱公司配队工具 & Tier List 2026 - AI智能推荐'
+            : 'Limbus Company Tier List & AI Team Builder 2026',
+        description: isZh
+            ? '边狱公司AI配队助手，为你的镜像地牢挑战推荐最优阵容。罪人人格评级、E.G.O.推荐、镜像地牢流派攻略，一站搞定。'
+            : 'Build the best Mirror Dungeon teams with our AI-powered team builder. Tier lists for all Sinners, E.G.O recommendations, and comprehensive strategy guides.',
+        keywords: isZh
+            ? ['边狱公司配队', '边狱公司tier list', '镜像地牢攻略', '边狱公司最强阵容', '边狱公司人格推荐', '边狱公司ego']
+            : ['limbus company tier list', 'limbus company team builder', 'mirror dungeon guide', 'limbus company best team', 'limbus company tier list 2026', 'limbus company sinner guide'],
+        alternates: {
+            canonical: `/${locale}/limbus-company`,
+            languages: {
+                en: '/en/limbus-company',
+                zh: '/zh/limbus-company',
+            },
+        },
+    };
+}
 
 export default function LimbusCompanyPage() {
+    const t = useTranslations('limbus');
+    const locale = useLocale();
+    const sinnersData = locale === 'zh' ? SINNERS_ZH : SINNERS;
+
     return (
         <div className="container mx-auto px-6 py-12 md:py-20">
             {/* Hero */}
             <section className="text-center">
                 <h1 className="text-4xl md:text-6xl font-serif font-bold text-white uppercase tracking-wider">
-                    Limbus Company
+                    {t('title')}
                 </h1>
                 <p className="mt-4 max-w-2xl mx-auto text-lg text-pm-gray-light">
-                    Lead the Sinners on a journey through The City in search of Golden Boughs
+                    {t('subtitle')}
                 </p>
             </section>
 
@@ -53,13 +58,13 @@ export default function LimbusCompanyPage() {
                 >
                     <div className="text-4xl mb-3">🎯</div>
                     <h3 className="text-xl font-serif font-bold text-white group-hover:text-pm-gold transition-colors">
-                        AI Team Builder
+                        {t('teamBuilder.title')}
                     </h3>
                     <p className="mt-2 text-sm text-pm-gray-light">
-                        Build optimal teams with AI
+                        {t('teamBuilder.description')}
                     </p>
                     <span className="mt-3 inline-block text-pm-gold text-xs font-bold px-2 py-1 bg-pm-gold/20 rounded">
-                        NEW ✨
+                        {t('teamBuilder.new')}
                     </span>
                 </Link>
 
@@ -69,10 +74,10 @@ export default function LimbusCompanyPage() {
                 >
                     <div className="text-4xl mb-3">👥</div>
                     <h3 className="text-xl font-serif font-bold text-white group-hover:text-pm-gold transition-colors">
-                        Sinner Database
+                        {t('sinners.title')}
                     </h3>
                     <p className="mt-2 text-sm text-pm-gray-light">
-                        All 12 Sinners & Identities
+                        {t('sinners.description')}
                     </p>
                 </Link>
 
@@ -82,10 +87,10 @@ export default function LimbusCompanyPage() {
                 >
                     <div className="text-4xl mb-3">👁️</div>
                     <h3 className="text-xl font-serif font-bold text-white group-hover:text-pm-gold transition-colors">
-                        E.G.O. Collection
+                        {t('egos.title')}
                     </h3>
                     <p className="mt-2 text-sm text-pm-gray-light">
-                        All E.G.O. & Tier Rankings
+                        {t('egos.description')}
                     </p>
                 </Link>
 
@@ -95,10 +100,10 @@ export default function LimbusCompanyPage() {
                 >
                     <div className="text-4xl mb-3">🪞</div>
                     <h3 className="text-xl font-serif font-bold text-white group-hover:text-pm-gold transition-colors">
-                        Mirror Dungeon
+                        {t('mirrorDungeon.title')}
                     </h3>
                     <p className="mt-2 text-sm text-pm-gray-light">
-                        Guides & Build Strategies
+                        {t('mirrorDungeon.description')}
                     </p>
                 </Link>
             </section>
@@ -106,10 +111,10 @@ export default function LimbusCompanyPage() {
             {/* Sinners Overview */}
             <section className="mt-16">
                 <h2 className="text-3xl font-serif font-bold text-center text-white mb-8">
-                    The Twelve Sinners
+                    {t('sinners.theTwelveSinners')}
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                    {sinners.map((sinner) => (
+                    {sinnersData.map((sinner) => (
                         <Link
                             key={sinner.id}
                             href={`/limbus-company/sinners/${sinner.id}`}
@@ -131,25 +136,23 @@ export default function LimbusCompanyPage() {
             <section className="mt-16 max-w-4xl mx-auto">
                 <div className="bg-gradient-to-r from-pm-red/20 to-pm-gold/20 border border-pm-red/30 rounded-lg p-8 text-center">
                     <h2 className="text-2xl font-serif font-bold text-white mb-4">
-                        🎯 Build Your Dream Team Now
+                        🎯 {t('buildDreamTeam')}
                     </h2>
                     <p className="text-pm-gray-light mb-6 max-w-2xl mx-auto">
-                        Our AI-powered team builder helps you create optimal Mirror Dungeon teams
-                        based on your available identities and E.G.O. Get personalized recommendations
-                        for any challenge!
+                        {t('buildTeamDescription')}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
                             href="/limbus-company/team-builder"
                             className="bg-pm-gold text-black font-bold py-3 px-6 rounded-lg hover:bg-yellow-500 transition-all"
                         >
-                            🎯 Open Team Builder
+                            🎯 {t('openTeamBuilder')}
                         </Link>
                         <Link
                             href="/limbus-company/mirror-dungeon"
                             className="bg-pm-gray-dark text-white font-bold py-3 px-6 rounded-lg hover:bg-pm-gray-dark/80 transition-all"
                         >
-                            🪞 Mirror Dungeon Guide
+                            🪞 {t('mirrorDungeonGuide')}
                         </Link>
                     </div>
                 </div>
